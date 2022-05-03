@@ -22,10 +22,16 @@ import javax.imageio.ImageIO;
  */
 public class Joueur extends Objet {
     private boolean saut;
+    private BufferedImage sprite;
 
-    public Joueur(boolean saut, String nom, int x, int y, int largeur, int hauteur, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, BufferedImage sprite) {
-        super(nom, x, y, largeur, hauteur, gauche, droite, haut, bas, vitesse, score, sprite);
+    public Joueur(boolean saut, String nom, int x, int y, int largeur, int hauteur, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score){//, BufferedImage sprite) {
+        super(nom, x, y, largeur, hauteur, gauche, droite, haut, bas, vitesse, score);//, sprite);
         this.saut = saut;
+        try {
+            this.sprite = ImageIO.read(getClass().getResource("../resources/banane.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 

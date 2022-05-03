@@ -24,7 +24,7 @@ public class Objet {
     private int score;
     private BufferedImage sprite;
 
-    public Objet(String nom, int x, int y, int largeur, int hauteur, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, BufferedImage sprite) {
+    public Objet(String nom, int x, int y, int largeur, int hauteur, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score){//, BufferedImage sprite) {
         this.nom = nom;
         this.x = x;
         this.y = y;
@@ -38,6 +38,10 @@ public class Objet {
         
         this.score = score;
         this.sprite = sprite;
+    }
+
+    public BufferedImage getSprite() {
+        return sprite;
     }
 
 

@@ -19,7 +19,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
     private BufferedImage framebuffer;
     private Graphics2D contexte;
     private JLabel jLabel1;
-    private Jeu jeu;
+    private Jeu jeu1;
     private Timer timer;
 
     public FenetreDeJeu() {
@@ -40,7 +40,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
         this.contexte = this.framebuffer.createGraphics();
         
         //Creation du jeu
-        this.jeu = new Jeu ();
+        this.jeu1 = new Jeu ();
         
         //Creation du Timer qui appelle this.actionPerformed() tous les 40 ms
         this.timer = new Timer(40, this);
@@ -51,7 +51,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
         return contexte;
     }
     public void actionPerformed(ActionEvent e){
-        this.jeu.rendu(contexte);
+        this.jeu1.rendu(contexte);
     }
     
 
@@ -62,7 +62,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
     }
 
     public Jeu getJeu() {
-        return jeu;
+        return jeu1;
     }
 
 
