@@ -64,7 +64,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
     public Jeu getJeu() {
         return jeu1;
     }
-
+    public void tostring(){
+        System.out.println(jeu1.getJoueur().toString());
+    }
 
 
 }

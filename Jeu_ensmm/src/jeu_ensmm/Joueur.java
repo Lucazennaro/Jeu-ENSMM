@@ -45,6 +45,11 @@ public class Joueur extends Objet {
         return saut;
     }
 
+    @Override
+    public String toString() {
+        return "Joueur{" + "saut=" + saut + ", sprite=" + sprite + '}';
+    }
+
     public void misAjourScore(Objet objet){
         if( super.collision(objet)==true ){
             super.setScore(super.getScore()+objet.getScore() );
