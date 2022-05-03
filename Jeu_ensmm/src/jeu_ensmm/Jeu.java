@@ -35,7 +35,7 @@ public class Jeu {
         }
         this.liste = new ArrayList();
         this.plateforme = new Plateforme();
-        this.joueur = new Joueur(false, "J1",500,500,100,100,false,false,false,false,10,0);
+        this.joueur = new Joueur(false, "J1",500,500,20,27,false,false,false,false,10,0);
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
     }
