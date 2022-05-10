@@ -110,14 +110,15 @@ public class Jeu {
         }
     
     public void miseAJourBaseDeDonnees(){
-           for (int i =0 ; i<3 ; i++ ) { 
                 
                 try {
                     Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "root", "4U-GrN*+v7z5");
-                    PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ? WHERE id = ?");
-                    requete.setInt(1, 4);
-                    requete.setInt(2, 6);
-                    requete.setInt(3, this.id);
+               
+                    PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id = ?");  // update des infos du joueur 
+                    requete.setInt(1, 3);
+                    requete.setInt(2, 4);
+                    requete.setInt(3, 6);
+                    requete.setInt(4, this.id);
                     System.out.println(requete);
                     requete.executeUpdate();
 
@@ -127,7 +128,7 @@ public class Jeu {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-           }
+           
     }
     
     public void rendu(Graphics2D contexte){
