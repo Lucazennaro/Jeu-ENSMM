@@ -26,6 +26,7 @@ public class Jeu {
     private  ArrayList<Objet> liste;
     private BufferedImage decor;
     private Joueur joueur; 
+    private int id;
 
     public Jeu() {
          try {
@@ -35,7 +36,8 @@ public class Jeu {
         }
         this.plateforme = new Plateforme();
         this.liste = new ArrayList();
-        this.joueur = new Joueur(false, "J1",500,500,100,100,false,false,false,false,10,0);
+        this.joueur = new Joueur(false, "J1",500,500,false,false,false,false,10,0,1);
+        this.liste.add(joueur);
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
     }
@@ -71,8 +73,6 @@ public class Jeu {
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
     }
-    
-   
         
     public void miseAJourHorizontale(Objet objet){
         if (this.getListe().get(this.getListe().indexOf(objet)).isDroite()== true || this.getListe().get(this.getListe().indexOf(objet)).isGauche()== true){
@@ -80,25 +80,26 @@ public class Jeu {
         }
     }
     
-    public void miseAJourVertical(Objet objet){
-        if(objet instanceof Joueur)
-        if(this.plateforme.getPlateforme()[objet.getX()][objet.getY()-objet.getHauteur()/2]==1 && (objet.isHaut()== true)){
+    public void miseAJourV(Objet objet){
+        if(objet instanceof Joueur){
+        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31-(objet.getHauteur()/2)%31]!=0 && (objet.isHaut()== true)){
             objet.setBas(false);
             objet.setHaut(true);
             for(int i=0; i<3;i+=1){
                 objet.miseAJourVertical();
             }
-            while(this.plateforme.getPlateforme()[objet.getX()][objet.getY()-objet.getHauteur()/2]!=1){
+            while(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31-(objet.getHauteur()/2)%31]==0){
                 objet.setBas(true);
                 objet.setHaut(false);
                 objet.miseAJourVertical();     
             }
         }
+        }
     }
     
     public void miseAJour(){
-        for(int i =0; i <= this.liste.size(); i++){
-                this.miseAJourVertical(this.liste.get(i));
+        for(int i =0; i < this.liste.size(); i+=1){
+                this.miseAJourV(this.liste.get(i));
                 this.miseAJourHorizontale(this.liste.get(i));
                 if(this.liste.get(i) instanceof Joueur){
                     
@@ -112,12 +113,12 @@ public class Jeu {
     
     public void rendu(Graphics2D contexte){
         contexte.drawImage(this.decor, 0, 0, null);
-        contexte.drawImage(this.joueur.getSprite(), 500, 500, null);
         for (int i = 0; i < plateforme.getHauteur(); i++) {
             for (int j = 0; j < plateforme.getLargeur(); j++) {
                 contexte.drawImage(plateforme.getTuiles()[plateforme.getPlateforme()[i][j]], j * plateforme.getTailleTuile(), i * plateforme.getTailleTuile(), null);
             }
         }
+        contexte.drawImage(this.joueur.getSprite(), this.joueur.getX(), this.joueur.getY(), null);
     } 
 
     void Afficher(Graphics2D contexteBuffer) {

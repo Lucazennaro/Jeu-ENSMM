@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ import javax.swing.Timer;
  *
  * @author guillaume.laurent
  */
-public class FenetreDeJeu extends JFrame implements ActionListener{
+public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 
     private BufferedImage framebuffer;
     private Graphics2D contexte;
@@ -31,18 +32,14 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
         this.jLabel1 = new JLabel();
         this.jLabel1.setPreferredSize(new java.awt.Dimension(1762, 992));
         this.setContentPane(this.jLabel1);
-        
+        this.addKeyListener(this);
         this.pack();
-        
         //Creation du jeu
         this.jeu1 = new Jeu ();
-        
-
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
         this.jLabel1.setIcon(new ImageIcon(framebuffer));
-        this.contexte = this.framebuffer.createGraphics();
-        
+        this.contexte = this.framebuffer.createGraphics(); 
         //Creation du Timer qui appelle this.actionPerformed() tous les 40 ms
         this.timer = new Timer(40, this);
         this.timer.start();
@@ -55,7 +52,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
-        
+        System.out.println(jeu1.getJoueur().getX());
     }
     
     public void keyTyped(KeyEvent e) {
@@ -64,33 +61,32 @@ public class FenetreDeJeu extends JFrame implements ActionListener{
     
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
+//            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true);
-            
-;
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getJoueur().setBas(true);
+            this.jeu1.getListe().get(0).setBas(true);
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getJoueur().setHaut(true);
+            this.jeu1.getListe().get(0).setHaut(true);
         }
     }
 
     public void keyReleased(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
-            this.jeu1.getJoueur().setDroite(false);
+            this.jeu1.getListe().get(0).setDroite(false);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
-            this.jeu1.getJoueur().setGauche(false);
+            this.jeu1.getListe().get(0).setGauche(false);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getJoueur().setBas(false);
+            this.jeu1.getListe().get(0).setBas(false);
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getJoueur().setHaut(false);
+            this.jeu1.getListe().get(0).setHaut(false);
         }
     }
     
