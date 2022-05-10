@@ -106,8 +106,10 @@ public class Jeu {
             }
         }
     
+    public void miseAJourBaseDeDonnees(){
+           
+    }
     
-        
     public void rendu(Graphics2D contexte){
         contexte.drawImage(this.decor, 0, 0, null);
         contexte.drawImage(this.joueur.getSprite(), 500, 500, null);
@@ -117,13 +119,14 @@ public class Jeu {
             }
         }
     } 
+
+    void Afficher(Graphics2D contexteBuffer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
+
         
 
     
-    
-    
-    
-    
-
+   
