@@ -52,7 +52,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
-        System.out.println(jeu1.getJoueur().getX());
+//        System.out.println(jeu1.getJoueur().getY());
     }
     
     public void keyTyped(KeyEvent e) {
@@ -68,10 +68,10 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.jeu1.getJoueur().setGauche(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getListe().get(0).setBas(true);
+            this.jeu1.getJoueur().setBas(true);
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getListe().get(0).setHaut(true);
+            this.jeu1.getJoueur().setHaut(true);
         }
     }
 
@@ -84,13 +84,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         }
         if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getListe().get(0).setBas(false);
+            System.out.println( this.jeu1.getListe().get(0).isHaut());
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
             this.jeu1.getListe().get(0).setHaut(false);
         }
     }
     
-
     public static void main(String[] args) {
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);

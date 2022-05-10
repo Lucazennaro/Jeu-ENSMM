@@ -124,7 +124,12 @@ public class Objet {
         return Math.sqrt((p.x-this.x)*(p.x-this.x)+(p.y-this.y)*(p.y-this.y));
     }
     
-    
+    public int getLargeur(){
+        return (int) sprite.getHeight();
+    }
+     public int getHauteur(){
+        return (int) sprite.getWidth();
+    }
     public boolean collision(Objet objet){
         if((x>=objet.getSprite().getHeight()+objet.getX()) 
            || (x+sprite.getHeight()<= objet.getX())
@@ -153,13 +158,13 @@ public class Objet {
     }
     public void miseAJourVertical() {
         if (this.bas) {
-            y -= vitesse;
+            y += 5;
         }
         if (this.haut) {
-            y += vitesse;
+            y -= 5;
         }
-        if (y > 1000) {
-            y = 1000;
+        if (y > 2000) {
+            y = 2000;
         }
         if (y < 0) {
             y = 0;

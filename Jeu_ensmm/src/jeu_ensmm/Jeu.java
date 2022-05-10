@@ -38,7 +38,7 @@ public class Jeu {
         }
         this.plateforme = new Plateforme();
         this.liste = new ArrayList();
-        this.joueur = new Joueur(false, "J1",500,500,false,false,false,false,10,0,1);
+        this.joueur = new Joueur(false, "J1",700,50,false,false,false,false,10,0,1);
         this.liste.add(joueur);
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
@@ -84,19 +84,22 @@ public class Jeu {
     
     public void miseAJourV(Objet objet){
         if(objet instanceof Joueur){
-        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31-(objet.getHauteur()/2)%31]!=0 && (objet.isHaut()== true)){
+//        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]!=0 && objet.isHaut()== true){//     
+//            objet.setBas(false);
+//            objet.setHaut(true);
+//            objet.miseAJourVertical();
+//        }
+            
+        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]==0){
+            objet.setBas(true);
+            objet.setHaut(false);
+            objet.miseAJourVertical();     
+        }
+        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]>0){
             objet.setBas(false);
-            objet.setHaut(true);
-            for(int i=0; i<3;i+=1){
-                objet.miseAJourVertical();
-            }
-            while(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31-(objet.getHauteur()/2)%31]==0){
-                objet.setBas(true);
-                objet.setHaut(false);
-                objet.miseAJourVertical();     
-            }
+            objet.setHaut(false);
         }
-        }
+        }   
     }
     
     public void miseAJour(){
