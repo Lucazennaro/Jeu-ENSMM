@@ -10,7 +10,7 @@ package jeu_ensmm;
  *
  * @author nbouvere
  */
-
+import java.sql.Connection;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Jeu {
     private Plateforme plateforme ;
@@ -108,7 +110,24 @@ public class Jeu {
         }
     
     public void miseAJourBaseDeDonnees(){
-           
+           for (int i =0 ; i<3 ; i++ ) { 
+                
+                try {
+                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "root", "4U-GrN*+v7z5");
+                    PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ? WHERE id = ?");
+                    requete.setInt(1, 4);
+                    requete.setInt(2, 6);
+                    requete.setInt(3, this.id);
+                    System.out.println(requete);
+                    requete.executeUpdate();
+
+                    requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+           }
     }
     
     public void rendu(Graphics2D contexte){
