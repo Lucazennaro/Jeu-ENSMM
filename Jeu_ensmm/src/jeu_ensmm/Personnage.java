@@ -41,7 +41,7 @@ public class Personnage {
 
     public void lancer() {
         this.x = 15 + Math.random() * 330;
-        this.y = -27;
+        this.y = 10;
     }
 
     public double getX() {

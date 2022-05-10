@@ -59,8 +59,9 @@ public class FenetreDeJeuNyancat extends JFrame implements ActionListener, KeyLi
     @Override
     public void actionPerformed(ActionEvent e) {
         this.jeu.miseAJour();
-        this.jeu.Afficher(contexteBuffer);
+        this.jeu.rendu(contexteBuffer);
         this.jLabel1.repaint();
+        System.out.println("maj");
     }
 
     @Override
