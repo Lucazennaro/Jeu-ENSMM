@@ -81,21 +81,29 @@ public class Jeu {
                 this.getListe().get(this.getListe().indexOf(objet)).miseAJourCote();
         }
     }
+
     
     public void miseAJourV(Objet objet){
 //        System.out.println((int) (objet.getX()/32));
+
         if(objet instanceof Joueur){
             if (this.getListe().get(this.getListe().indexOf(objet)).isHaut()== true || this.getListe().get(this.getListe().indexOf(objet)).isBas()== true){
-                if (this.plateforme.getPlateforme()[(int) objet.getX()/32+1][(int) objet.getY()/32+1]==0){
-                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
-                    this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+//                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+//                }
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(false);
         }
-                if (this.plateforme.getPlateforme()[(int) objet.getX()/32+1][(int) objet.getY()/32+1]== 128 && objet.isHaut()== true){
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isHaut()== true){
                     this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
-                    this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+                    
                 }
                 
         }
+            if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+                }
+            this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
         }
 ////        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]!=0 && objet.isHaut()== true){//     
 ////            objet.setBas(false);
@@ -154,7 +162,7 @@ public class Jeu {
                 contexte.drawImage(plateforme.getTuiles()[plateforme.getPlateforme()[i][j]], j * plateforme.getTailleTuile(), i * plateforme.getTailleTuile(), null);
             }
         }
-        contexte.drawImage(this.joueur.getSprite(), this.joueur.getX(), this.joueur.getY(), null);
+        contexte.drawImage(this.joueur.getSprite(), this.joueur.getX()-32, this.joueur.getY()-32, null);
     } 
 
     void Afficher(Graphics2D contexteBuffer) {
