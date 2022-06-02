@@ -56,7 +56,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     }
     
     public void keyTyped(KeyEvent e) {
-        // NOP
+        // NOP;
     }
     
     public void keyPressed(KeyEvent evt) {
@@ -67,12 +67,20 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
         }
-        if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getJoueur().setBas(true);
+//        if (evt.getKeyCode() == evt.VK_UP) {
+//            this.jeu1.getJoueur().setBas(true);
+//        }
+       
+         if (evt.getKeyCode() == evt.VK_UP) {
+             int s=0;
+             while(s<20){
+                this.jeu1.getJoueur().setY(this.jeu1.getJoueur().getY()-5); 
+                s=s+1;
+             }
+             this.jeu1.getJoueur().setBas(true);
+            s=0;    
         }
-        if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getJoueur().setHaut(true);
-        }
+        
     }
 
     public void keyReleased(KeyEvent evt) {
@@ -82,13 +90,10 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getListe().get(0).setGauche(false);
         }
-        if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getListe().get(0).setBas(false);
-            System.out.println( this.jeu1.getListe().get(0).isHaut());
-        }
-        if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getListe().get(0).setHaut(false);
-        }
+//        if (evt.getKeyCode() == evt.VK_UP) {
+//            this.jeu1.getListe().get(0).setBas(false);
+//            System.out.println( this.jeu1.getListe().get(0).isHaut());
+//        }
     }
     
     public static void main(String[] args) {

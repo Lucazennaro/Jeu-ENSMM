@@ -149,8 +149,8 @@ public class Objet {
         if (this.droite) {
             x += vitesse;
         }
-        if (x > 1600) {
-            x = 1600;
+        if (x > 1776-112) {
+            x = 1776-112;
         }
         if (x < 0) {
             x = 0;
@@ -163,13 +163,15 @@ public class Objet {
         if (this.haut) {
             y -= 5;
         }
-        if (y > 2000) {
-            y = 2000;
+        if (y > 970-this.getHauteur()) {
+            y = 970-this.getHauteur();
         }
         if (y < 0) {
             y = 0;
         }
     }
+    
+    
     
     public void miseAJourDeplacement(){
         this.miseAJourCote();
@@ -180,3 +182,5 @@ public class Objet {
         contexte.drawImage(this.sprite, (int) x, (int) y, null);
     }
 }
+
+

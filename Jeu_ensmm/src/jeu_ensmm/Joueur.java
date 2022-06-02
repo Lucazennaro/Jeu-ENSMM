@@ -41,7 +41,9 @@ public class Joueur extends Objet {
     public boolean isSaut() {
         return saut;
     }
-
+   
+    
+    
     @Override
     public String toString() {
         return "Joueur{" + "saut=" + saut + '}';
