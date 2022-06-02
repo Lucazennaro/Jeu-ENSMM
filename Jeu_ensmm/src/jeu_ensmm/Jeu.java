@@ -23,6 +23,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import outils.OutilsJDBC;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Jeu {
     private Plateforme plateforme ;
@@ -126,13 +132,10 @@ public class Jeu {
             }
         }
     public void nombreDeJoueurs(){
-        int res = 0 ;
         try {
-                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
+                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "root", "4U-GrN*+v7z5");
                
-                    PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) FROM joueur");  // update des infos du joueur 
-                                   
-                    requete.close();
+                   
                     
             connexion.close();
 
@@ -145,7 +148,7 @@ public class Jeu {
     public void miseAJourBaseDeDonnees(){
                 
                 try {
-                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
+                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC",  "root", "4U-GrN*+v7z5");
                
                     PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id = ?");  // update des infos du joueur 
                     requete.setInt(1, 3);
