@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Jeu {
@@ -111,11 +112,27 @@ public class Jeu {
                 }
             }
         }
+    public void nombreDeJoueurs(){
+        int res = 0 ;
+        try {
+                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
+               
+                    PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) FROM joueur");  // update des infos du joueur 
+                                   
+                    requete.close();
+                    
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
     
     public void miseAJourBaseDeDonnees(){
                 
                 try {
-                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "root", "4U-GrN*+v7z5");
+                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
                
                     PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id = ?");  // update des infos du joueur 
                     requete.setInt(1, 3);
