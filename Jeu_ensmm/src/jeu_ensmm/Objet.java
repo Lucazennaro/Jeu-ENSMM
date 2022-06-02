@@ -150,7 +150,7 @@ public class Objet {
             x += vitesse;
         }
         if (x > 1776-this.getLargeur()) {
-            x = 1776-1776-this.getLargeur();
+            x = 1776-this.getLargeur();
         }
         if (x < 0) {
             x = 0;
