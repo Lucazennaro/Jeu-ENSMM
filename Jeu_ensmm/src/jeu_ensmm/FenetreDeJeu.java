@@ -40,6 +40,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
         this.jLabel1.setIcon(new ImageIcon(framebuffer));
         this.contexte = this.framebuffer.createGraphics(); 
+        
         //Creation du Timer qui appelle this.actionPerformed() tous les 40 ms
         this.timer = new Timer(40, this);
         this.timer.start();
@@ -52,7 +53,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
-//        System.out.println(jeu1.getJoueur().getY());
+//        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
     }
     
     public void keyTyped(KeyEvent e) {
@@ -67,11 +68,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
         }
-        if (evt.getKeyCode() == evt.VK_UP) {
+        if (evt.getKeyCode() == evt.VK_DOWN) {
             this.jeu1.getJoueur().setBas(true);
         }
-        if (evt.getKeyCode() == evt.VK_DOWN) {
+        if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getJoueur().setHaut(true);
+            System.out.println(jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32+1][(int) this.jeu1.getListe().get(0).getY()/32+1]);
+//            
         }
     }
 
@@ -82,11 +85,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getListe().get(0).setGauche(false);
         }
-        if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getListe().get(0).setBas(false);
-            System.out.println( this.jeu1.getListe().get(0).isHaut());
-        }
         if (evt.getKeyCode() == evt.VK_DOWN) {
+            this.jeu1.getListe().get(0).setBas(false);
+//            System.out.println( this.jeu1.getListe().get(0).isHaut());
+        }
+        if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getListe().get(0).setHaut(false);
         }
     }
