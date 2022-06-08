@@ -45,7 +45,7 @@ public class Jeu {
         }
         this.plateforme = new Plateforme();
         this.liste = new ArrayList();
-        this.joueur = new Joueur(false, "J1",0,0,false,false,false,false,8,0,1);
+        this.joueur = new Joueur(false, "J1",0,0,false,false,false,false,12,0,1);
         this.liste.add(joueur);
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
@@ -88,21 +88,34 @@ public class Jeu {
                 this.getListe().get(this.getListe().indexOf(objet)).miseAJourCote();
         }
     }
+
     
     public void miseAJourV(Objet objet){
 //        System.out.println((int) (objet.getX()/32));
+
         if(objet instanceof Joueur){
             if (this.getListe().get(this.getListe().indexOf(objet)).isHaut()== true || this.getListe().get(this.getListe().indexOf(objet)).isBas()== true){
-                if (this.plateforme.getPlateforme()[(int) objet.getX()/32+1][(int) objet.getY()/32+1]==0){
-                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
-                    this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+//                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+//                }
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0 && this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32] !=128){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(false);
         }
-                if (this.plateforme.getPlateforme()[(int) objet.getX()/32+1][(int) objet.getY()/32+1]== 128 && objet.isHaut()== true){
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isHaut()== true){
                     this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
-                    this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+                    
+                }
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isBas()== true){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+                    
                 }
                 
         }
+            if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+                    this.getListe().get(this.getListe().indexOf(objet)).setHaut(false);
+                }
+            this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
         }
 ////        if(this.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]!=0 && objet.isHaut()== true){//     
 ////            objet.setBas(false);
@@ -174,7 +187,7 @@ public class Jeu {
                 contexte.drawImage(plateforme.getTuiles()[plateforme.getPlateforme()[i][j]], j * plateforme.getTailleTuile(), i * plateforme.getTailleTuile(), null);
             }
         }
-        contexte.drawImage(this.joueur.getSprite(), this.joueur.getX(), this.joueur.getY(), null);
+        contexte.drawImage(this.joueur.getSprite(), this.joueur.getX(), this.joueur.getY()-32, null);
     } 
 
     void Afficher(Graphics2D contexteBuffer) {

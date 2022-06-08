@@ -149,8 +149,8 @@ public class Objet {
         if (this.droite) {
             x += vitesse;
         }
-        if (x > 1776-112) {
-            x = 1776-112;
+        if (x > 1776-this.getLargeur()) {
+            x = 1776-this.getLargeur();
         }
         if (x < 0) {
             x = 0;
@@ -158,13 +158,13 @@ public class Objet {
     }
     public void miseAJourVertical() {
         if (this.bas) {
-            y += 5;
+            y += vitesse;
         }
         if (this.haut) {
             y -= vitesse;
         }
-        if (y > 970-this.getHauteur()) {
-            y = 970-this.getHauteur();
+        if (y > 992-this.getHauteur()) {
+            y = 992-this.getHauteur();
         }
         if (y < 0) {
             y = vitesse;
