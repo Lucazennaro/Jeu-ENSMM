@@ -17,7 +17,7 @@ public class TestBaseDeDonnees {
     public static void main(String[] args) {
         // TODO code application logic here
         Jeu jeuTest = new Jeu() ;
-        
+        jeuTest.creationObjet(0, "geg" , 0, 0, 0, 0);
     }
     
     

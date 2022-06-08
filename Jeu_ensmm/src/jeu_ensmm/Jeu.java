@@ -144,41 +144,68 @@ public class Jeu {
                 }
             }
         }
-    public void nombreDeJoueurs(){
+    public int nombreDeJoueurs(){
+        int nbJoueurs = 0;
         try {
-                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "root", "4U-GrN*+v7z5");
-               
-                   
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
                     
+            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbJoueurs FROM joueur ;");
+            ResultSet resultat = requete.executeQuery();
+            resultat.next();
+            nbJoueurs = resultat.getInt("nbJoueurs") ;
+            requete.close();
             connexion.close();
+            
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+        return nbJoueurs ;
+    }
+    public int nombreObjets(){
+        int nbObjets = 0;
+        try {
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+                    
+            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbObjets FROM objet ;");
+            ResultSet resultat = requete.executeQuery();
+            resultat.next();
+            nbObjets = resultat.getInt("nbobjets") ;
+            requete.close();
+            connexion.close();
+            
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nbObjets ;
     }
     
-    public void miseAJourBaseDeDonnees(){
-                
-                try {
-                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC",  "root", "4U-GrN*+v7z5");
-               
-                    PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id = ?");  // update des infos du joueur 
-                    requete.setInt(1, 3);
-                    requete.setInt(2, 4);
-                    requete.setInt(3, 6);
-                    requete.setInt(4, this.id);
-                    System.out.println(requete);
-                    requete.executeUpdate();
+    public void creationObjet(int idObjet , String nom , int x , int y , int score , int apparence) {
 
-                    requete.close();
+        try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO objet VALUES (?,?,?,?,?,?)");
+            requete.setInt(1, idObjet);
+            requete.setString(2,nom);
+            requete.setInt(3, x);
+            requete.setInt(4, y);
+            requete.setInt(5, score);
+            requete.setInt(6, apparence);
+            
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
             connexion.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-           
-    }
+   }
+    
     
     public void rendu(Graphics2D contexte){
         contexte.drawImage(this.decor, 0, 0, null);

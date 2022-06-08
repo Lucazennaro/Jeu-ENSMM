@@ -50,7 +50,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         //Creation du Timer qui appelle this.actionPerformed() tous les 40 ms
         this.timer = new Timer(40, this);
         this.timer.start();
-        this.jeu1.nombreDeJoueurs();
+        
+        // ESSAIS BASE DE DONNEES
+        
+        
+        System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
+        //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
     }
 
     public Graphics2D getContexte() {
