@@ -49,7 +49,6 @@ public class Objet {
             Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //this.sprite = null;
     }
 
     public void setSprite(BufferedImage sprite) {
@@ -109,7 +108,7 @@ public class Objet {
         this.bas = bas;
     }
     public void setVitesse(int vitesse) {
-        this.vitesse = vitesse;
+        this.vitesse = 8;
     }
     public void setScore(int score) {
         this.score = score;
@@ -161,13 +160,13 @@ public class Objet {
             y += 5;
         }
         if (this.haut) {
-            y -= 5;
+            y -= vitesse;
         }
         if (y > 970-this.getHauteur()) {
             y = 970-this.getHauteur();
         }
         if (y < 0) {
-            y = 0;
+            y = vitesse;
         }
     }
     
