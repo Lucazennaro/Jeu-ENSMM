@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
  * @author nbouvere
  */
 public class Objet {
+    private int id;
     private String nom;
     private int x, y;
 
@@ -28,7 +29,8 @@ public class Objet {
     private int score;
     private BufferedImage sprite;
 
-    public Objet(String nom, int x, int y, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, int numSprite){//, BufferedImage sprite) {
+    public Objet(int id,String nom, int x, int y, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, int numSprite){//, BufferedImage sprite) {
+        this.id =id;
         this.nom = nom;
         this.x = x;
         this.y = y;
@@ -141,6 +143,15 @@ public class Objet {
         }
                     
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     public void miseAJourCote() {
         if (this.gauche) {
