@@ -56,6 +56,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         
         System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
         //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
+        //this.jeu1.getJoueur().score();
     }
 
     public Graphics2D getContexte() {
@@ -109,19 +110,20 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.jeu1.getListe().get(0).setHaut(false);
         }
     }
+//    public void AffichageScore(Joueur joueur1, Graphics2D fenetre_graphique){
+//        fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
+//        }
     
     public static void main(String[] args) {
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
-        fenetre.getJeu().rendu(fenetre.getContexte());
+        fenetre.getJeu().rendu(fenetre.getContexte());     
     }
 
     public Jeu getJeu() {
         return jeu1;
     }
     
-    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
-        fenêtre_graphique.drawString(String.valueOf(joueur1.Getscore()), 1750, 0);
-        }
+    
 
 }

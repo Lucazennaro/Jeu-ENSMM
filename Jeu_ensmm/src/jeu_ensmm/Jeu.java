@@ -251,8 +251,12 @@ public class Jeu {
         }
         for(int i =0; i < this.liste.size(); i+=1){
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
+            if(this.liste.get(i).getId()==1){
+            contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).score(), 10, 20);
+            
         }
-        } 
+        }
+    }
 
     void Afficher(Graphics2D contexteBuffer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
