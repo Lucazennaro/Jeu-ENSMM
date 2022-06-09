@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import outils.OutilsJDBC;
 
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -56,6 +57,8 @@ public class Joueur extends Objet {
     public void misAjourScore(Objet objet){
         if( super.collision(objet)==true ){
             super.setScore(super.getScore()+objet.getScore() );
+            objet.setX(Random().nextInt(1776-objet.getLargeur()));
+            objet.set(Random().nextInt(992-objet.getHauteur()));
         }
     }
 
