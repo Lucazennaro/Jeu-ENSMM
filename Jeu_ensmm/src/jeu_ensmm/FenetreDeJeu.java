@@ -66,7 +66,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
-System.out.println(jeu1.getListe().get(0));
+//System.out.println(jeu1.getListe().get(0));
     }
     
     public void keyTyped(KeyEvent e) {
