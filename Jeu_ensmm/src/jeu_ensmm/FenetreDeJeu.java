@@ -119,6 +119,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public Jeu getJeu() {
         return jeu1;
     }
- 
+    
+    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
+        fenêtre_graphique.drawString(String.valueOf(joueur1.Getscore()), 1750, 0);
+        }
 
 }
