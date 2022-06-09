@@ -205,6 +205,30 @@ public class Jeu {
             ex.printStackTrace();
         }
    }
+    public void addJoueur( Joueur joueur) {
+        try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
+            requete.setInt(1, 0);
+            requete.setString(2,joueur.getNom());
+            requete.setInt(3, 0);
+            requete.setInt(4, 0);
+            requete.setInt(5, 0);
+            requete.setInt(6, 0);
+            
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
     
     
     public void rendu(Graphics2D contexte){
