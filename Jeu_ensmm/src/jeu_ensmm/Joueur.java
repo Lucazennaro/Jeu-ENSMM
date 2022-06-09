@@ -5,9 +5,15 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import outils.OutilsJDBC;
 
 
 /*
@@ -52,6 +58,23 @@ public class Joueur extends Objet {
             super.setScore(super.getScore()+objet.getScore() );
         }
     }
-    
- 
+
+    public void score(){
+        try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/tp_jdbc_vs1tp1?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
+
+            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM objet WHERE id = ?;");
+            requete.setString(1,"Natacha");
+            ResultSet resultat = requete.executeQuery();
+            OutilsJDBC.afficherResultSet(resultat);
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
+
