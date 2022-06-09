@@ -208,18 +208,24 @@ public class Jeu {
             ex.printStackTrace();
         }
    }
-    public void addJoueur( Joueur joueur) {
+    public void creationMonJoueur (String nom){
+        joueur = new Joueur(0, false, nom,0,0,false,false,false,false,12,0,2) ;
+        joueur.setId(this.nombreDeJoueurs()+1);
+        this.setJoueur(joueur);
+        
+    }
+    public void addJoueur() {
         try {
 
             Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
-            requete.setInt(1, 0);
-            requete.setString(2,joueur.getNom());
+            requete.setInt(1, this.getJoueur().getId() );
+            requete.setString(2,this.getJoueur().getNom());
             requete.setInt(3, 0);
             requete.setInt(4, 0);
             requete.setInt(5, 0);
-            requete.setInt(6, 0);
+            requete.setInt(6, this.getJoueur().getId());
             
             System.out.println(requete);
             requete.executeUpdate();
@@ -230,6 +236,8 @@ public class Jeu {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        
+        this.liste.add(this.getJoueur().getId()-1, this.getJoueur());S
         
     }
     
