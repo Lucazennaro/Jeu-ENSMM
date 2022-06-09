@@ -33,7 +33,7 @@ public class Joueur extends Objet {
 //            Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }
-    
+   
     public void setSaut(boolean saut) {
         this.saut = saut;
     }

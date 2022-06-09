@@ -7,16 +7,18 @@ package jeu_ensmm;
 
 /**
  *
- * @author lzennaro
+ * @author cdebremo
  */
-public class Jeu_ensmm {
+public class TestBaseDeDonnees {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(1755%32);
         // TODO code application logic here
+        Jeu jeuTest = new Jeu() ;
+        jeuTest.creationObjet(0, "geg" , 0, 0, 0, 0);
     }
+    
     
 }

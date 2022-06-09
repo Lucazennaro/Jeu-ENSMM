@@ -41,7 +41,7 @@ public class Objet {
         this.score = score;
         try {
             switch (numSprite) {
-                case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/donkeyKong.png"))); break;
+                case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;
                 case 2 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;
                 default : this.setSprite(ImageIO.read(getClass().getResource("../resources/jungle.png"))); break;
             }
@@ -109,7 +109,7 @@ public class Objet {
         this.bas = bas;
     }
     public void setVitesse(int vitesse) {
-        this.vitesse = vitesse;
+        this.vitesse = 8;
     }
     public void setScore(int score) {
         this.score = score;
@@ -149,8 +149,8 @@ public class Objet {
         if (this.droite) {
             x += vitesse;
         }
-        if (x > 1600) {
-            x = 1600;
+        if (x > 1776-this.getLargeur()) {
+            x = 1776-this.getLargeur();
         }
         if (x < 0) {
             x = 0;
@@ -158,16 +158,16 @@ public class Objet {
     }
     public void miseAJourVertical() {
         if (this.bas) {
-            y += 5;
+            y += vitesse;
         }
         if (this.haut) {
-            y -= 5;
+            y -= vitesse;
         }
-        if (y > 2000) {
-            y = 2000;
+        if (y > 992-this.getHauteur()) {
+            y = 992-this.getHauteur();
         }
         if (y < 0) {
-            y = 0;
+            y = vitesse;
         }
     }
     
