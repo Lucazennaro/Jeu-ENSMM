@@ -81,5 +81,9 @@ public class Joueur extends Objet {
             ex.printStackTrace();
         }
     }
+
+    Object Getscore() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 

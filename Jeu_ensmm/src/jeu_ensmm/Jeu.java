@@ -39,13 +39,15 @@ public class Jeu {
 
     public Jeu() {
          try {
-            this.decor = ImageIO.read(getClass().getResource("../resources/ENSMM_exterieur.png"));
+            this.decor = ImageIO.read(getClass().getResource("../resources/Chatelet_map.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(Jeu1.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.plateforme = new Plateforme();
+
         this.liste = new ArrayList();
-        this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,16,0,1);
+
+        this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
         this.liste.add(joueur);
         this.liste.add(new Objet(2, "J1",150,575,false,false,false,false,12,0,2));
 //        this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,1));
