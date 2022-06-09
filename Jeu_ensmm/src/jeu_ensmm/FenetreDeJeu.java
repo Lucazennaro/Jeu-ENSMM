@@ -42,6 +42,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.pack();
         //Creation du jeu
         this.jeu1 = new Jeu ();
+       // this.jeu1.addJoueur();
+        
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
         this.jLabel1.setIcon(new ImageIcon(framebuffer));
@@ -53,9 +55,14 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         
         // ESSAIS BASE DE DONNEES
         
+        this.jeu1.creationMonJoueur("Géralduca");
+       System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
+       this.jeu1.addJoueur();
+       System.out.println(this.jeu1.getListe());
         
         System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
         //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
+        
     }
 
     public Graphics2D getContexte() {
@@ -66,7 +73,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
-System.out.println(jeu1.getListe().get(0));
+//System.out.println(jeu1.getListe().get(0));
     }
     
     public void keyTyped(KeyEvent e) {
