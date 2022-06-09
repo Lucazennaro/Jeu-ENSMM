@@ -5,6 +5,12 @@
  */
 package interfaces;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author lzennaro
@@ -79,8 +85,31 @@ public class Pseudo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public int nombreDeJoueurs(){
+        int nbJoueurs = 0;
+        try {
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+                    
+            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbJoueurs FROM joueur ;");
+            ResultSet resultat = requete.executeQuery();
+            resultat.next();
+            nbJoueurs = resultat.getInt("nbJoueurs") ;
+            requete.close();
+            connexion.close();
+            
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nbJoueurs ;
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if ;// TODO add your handling code here:
+        
+        while (this.nombreDeJoueurs()<3.5){
+             
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
