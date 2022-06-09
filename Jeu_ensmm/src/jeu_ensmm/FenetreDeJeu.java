@@ -66,6 +66,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
+//System.out.println(jeu1.getListe().get(0));
     }
     
     public void keyTyped(KeyEvent e) {
@@ -76,8 +77,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true);
-            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
-            System.out.println((int) this.jeu1.getListe().get(0).getY()/32);
+//            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+//            System.out.println((int) this.jeu1.getListe().get(0).getY()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
@@ -118,6 +119,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public Jeu getJeu() {
         return jeu1;
     }
- 
+    
+    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
+        fenêtre_graphique.drawString(String.valueOf(joueur1.Getscore()), 1750, 0);
+        }
 
 }
