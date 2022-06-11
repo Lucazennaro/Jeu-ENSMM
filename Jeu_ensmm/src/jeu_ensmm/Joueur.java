@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import outils.OutilsJDBC;
-
+import java.util.Random;
 
 
 /*
@@ -54,6 +54,7 @@ public class Joueur extends Objet {
         return "Joueur{" + "saut=" + saut + '}';
     }
 
+
 //    public void misAjourScore(Objet objet){
 //        if( super.collision(objet)==true ){
 //            super.setScore(super.getScore()+objet.getScore() );
@@ -63,6 +64,23 @@ public class Joueur extends Objet {
 //    }
 
     
+
+    public void misAjourScore(Objet objet){
+        if( super.collision(objet)==true ){
+            super.setScore(super.getScore()+objet.getScore() );
+            Random newPosX = new Random();
+            Random newPosY = new Random();
+            objet.setX(newPosX.nextInt(1776-objet.getLargeur()));
+            objet.setY(newPosY.nextInt(992-objet.getHauteur()));
+        }
+    }
+
+   
+
+    Object Getscore() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
 
 
