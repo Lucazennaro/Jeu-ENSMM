@@ -110,8 +110,8 @@ public class Pseudo extends javax.swing.JFrame {
         SalonAttente salon = new SalonAttente();
         salon.setVisible(true);
         while (this.nombreDeJoueurs()<3.5){
-            JTextField nbjoueur = "this.nombreDeJoueurs()";
-            salon.setjTextField1(JTextField(this.nombreDeJoueurs()));
+            String nbjoueur = "" + this.nombreDeJoueurs();
+            salon.setjTextField1(nbjoueur);
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

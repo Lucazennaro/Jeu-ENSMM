@@ -25,8 +25,8 @@ public class SalonAttente extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void setjTextField1(JTextField jTextField1) {
-        this.jTextField1 = jTextField1;
+    public void setjTextField1(String jTextField1) {
+        this.jTextField1.setText(jTextField1);
     }
     
     
