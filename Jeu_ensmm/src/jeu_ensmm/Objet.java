@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
  * @author nbouvere
  */
 public class Objet {
+    private int id;
     private String nom;
     private int x, y;
 
@@ -28,7 +29,8 @@ public class Objet {
     private int score;
     private BufferedImage sprite;
 
-    public Objet(String nom, int x, int y, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, int numSprite){//, BufferedImage sprite) {
+    public Objet(int id,String nom, int x, int y, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, int numSprite){//, BufferedImage sprite) {
+        this.id =id;
         this.nom = nom;
         this.x = x;
         this.y = y;
@@ -41,7 +43,7 @@ public class Objet {
         this.score = score;
         try {
             switch (numSprite) {
-                case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/donkeyKong.png"))); break;
+                case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;
                 case 2 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;
                 default : this.setSprite(ImageIO.read(getClass().getResource("../resources/jungle.png"))); break;
             }
@@ -140,6 +142,15 @@ public class Objet {
         }
                     
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     public void miseAJourCote() {
         if (this.gauche) {
@@ -148,8 +159,8 @@ public class Objet {
         if (this.droite) {
             x += vitesse;
         }
-        if (x > 1776-112) {
-            x = 1776-112;
+        if (x > 1776-this.getLargeur()) {
+            x = 1776-this.getLargeur();
         }
         if (x < 0) {
             x = 0;
@@ -157,13 +168,13 @@ public class Objet {
     }
     public void miseAJourVertical() {
         if (this.bas) {
-            y += 5;
+            y += vitesse;
         }
         if (this.haut) {
             y -= vitesse;
         }
-        if (y > 970-this.getHauteur()) {
-            y = 970-this.getHauteur();
+        if (y > 992-this.getHauteur()) {
+            y = 992-this.getHauteur();
         }
         if (y < 0) {
             y = vitesse;

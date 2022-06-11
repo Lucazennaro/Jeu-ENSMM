@@ -21,6 +21,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import outils.OutilsJDBC;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Jeu {
@@ -28,7 +35,7 @@ public class Jeu {
     private  ArrayList<Objet> liste;
     private BufferedImage decor;
     private Joueur joueur; 
-    private int id;
+
 
     public Jeu() {
          try {
@@ -38,8 +45,10 @@ public class Jeu {
         }
         this.plateforme = new Plateforme();
         this.liste = new ArrayList();
-        this.joueur = new Joueur(false, "J1",0,0,false,false,false,false,20,0,1);
+        this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
         this.liste.add(joueur);
+        this.liste.add(new Objet(2, "J1",150,600,false,false,false,false,12,0,2));
+//        this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,1));
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
     }
@@ -81,53 +90,152 @@ public class Jeu {
                 this.getListe().get(this.getListe().indexOf(objet)).miseAJourCote();
         }
     }
+
     
     public void miseAJourV(Objet objet){
 //        System.out.println((int) (objet.getX()/32));
+
         if(objet instanceof Joueur){
             if (this.getListe().get(this.getListe().indexOf(objet)).isHaut()== true || this.getListe().get(this.getListe().indexOf(objet)).isBas()== true){
+
                 if (this.plateforme.getPlateforme()[(int) (objet.getY()/32)][(int) (objet.getX()/32)]==0){
                     this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+
+//                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+//                }
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0 && this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32] !=128){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(false);
+        }
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isHaut()== true){
+                    this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
+                    System.out.println(this.getListe().get(this.getListe().indexOf(objet)).isHaut());
+                    
+                }
+                if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isBas()== true){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+                    
                 }
                 if (this.plateforme.getPlateforme()[(int) (objet.getY()/32)][(int) (objet.getX()/32)]!= 128 && objet.isHaut()== true){
                     this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
                 } 
             }
         }
+
         this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+
+            if (this.plateforme.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+                    this.getListe().get(this.getListe().indexOf(objet)).setHaut(false);
+                }
+            this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+
         }
+    }
   
     public void miseAJour(){
         for(int i =0; i < this.liste.size(); i+=1){
                 this.miseAJourV(this.liste.get(i));
                 this.miseAJourHorizontale(this.liste.get(i));
-                if(this.liste.get(i) instanceof Joueur){
-                    
+                if(!(this.liste.get(i) instanceof Joueur)){
+                    this.liste.get(i).collision(joueur);
                 }
             }
         }
-    
-    public void miseAJourBaseDeDonnees(){
-                
-                try {
-                    Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "root", "4U-GrN*+v7z5");
-               
-                    PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id = ?");  // update des infos du joueur 
-                    requete.setInt(1, 3);
-                    requete.setInt(2, 4);
-                    requete.setInt(3, 6);
-                    requete.setInt(4, this.id);
-                    System.out.println(requete);
-                    requete.executeUpdate();
+    public int nombreDeJoueurs(){
+        int nbJoueurs = 0;
+        try {
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+                    
+            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbJoueurs FROM joueur ;");
+            ResultSet resultat = requete.executeQuery();
+            resultat.next();
+            nbJoueurs = resultat.getInt("nbJoueurs") ;
+            requete.close();
+            connexion.close();
+            
 
-                    requete.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nbJoueurs ;
+    }
+    public int nombreObjets(){
+        int nbObjets = 0;
+        try {
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+                    
+            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbObjets FROM objet ;");
+            ResultSet resultat = requete.executeQuery();
+            resultat.next();
+            nbObjets = resultat.getInt("nbobjets") ;
+            requete.close();
+            connexion.close();
+            
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nbObjets ;
+    }
+    
+    public void creationObjet(int idObjet , String nom , int x , int y , int score , int apparence) {
+
+        try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO objet VALUES (?,?,?,?,?,?)");
+            requete.setInt(1, idObjet);
+            requete.setString(2,nom);
+            requete.setInt(3, x);
+            requete.setInt(4, y);
+            requete.setInt(5, score);
+            requete.setInt(6, apparence);
+            
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
             connexion.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-           
+   }
+    public void creationMonJoueur (String nom){
+        joueur = new Joueur(0, false, nom,0,0,false,false,false,false,12,0,2) ;
+        joueur.setId(this.nombreDeJoueurs()+1);
+        this.setJoueur(joueur);
+        
     }
+    public void addJoueur() {
+        try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
+            requete.setInt(1, this.getJoueur().getId() );
+            requete.setString(2,this.getJoueur().getNom());
+            requete.setInt(3, 0);
+            requete.setInt(4, 0);
+            requete.setInt(5, 0);
+            requete.setInt(6, this.getJoueur().getId());
+            
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        this.liste.add(this.getJoueur().getId()-1, this.getJoueur());
+        
+    }
+    
     
     public void rendu(Graphics2D contexte){
         contexte.drawImage(this.decor, 0, 0, null);
@@ -136,15 +244,19 @@ public class Jeu {
                 contexte.drawImage(plateforme.getTuiles()[plateforme.getPlateforme()[i][j]], j * plateforme.getTailleTuile(), i * plateforme.getTailleTuile(), null);
             }
         }
-        contexte.drawImage(this.joueur.getSprite(), this.joueur.getX(), this.joueur.getY(), null);
-    } 
+        for(int i =0; i < this.liste.size(); i+=1){
+            contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
+        }
+        } 
 
     void Afficher(Graphics2D contexteBuffer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-}
-
+   
+}  
+    
+    
         
 
     

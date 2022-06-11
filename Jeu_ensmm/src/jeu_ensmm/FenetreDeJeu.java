@@ -10,6 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+import outils.OutilsJDBC;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Exemple de fenetre de jeu en utilisant uniquement des commandes
@@ -44,6 +50,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         //Creation du Timer qui appelle this.actionPerformed() tous les 40 ms
         this.timer = new Timer(40, this);
         this.timer.start();
+        
+        // ESSAIS BASE DE DONNEES
+        
+        
+        System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
+        //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
     }
 
     public Graphics2D getContexte() {
@@ -53,6 +65,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
+
     }
     
     public void keyTyped(KeyEvent e) {
@@ -62,13 +75,21 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
             this.jeu1.getJoueur().setDroite(true);
+//            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+//            System.out.println((int) this.jeu1.getListe().get(0).getY()/32);
+//            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
+
              this.jeu1.getJoueur().setHaut(true);
 //            System.out.println(jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
+
+            this.jeu1.getJoueur().setHaut(true);
+            
+//            
         }
         
     }
@@ -102,9 +123,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public Jeu getJeu() {
         return jeu1;
     }
-    public void tostring(){
-        System.out.println(jeu1.getJoueur().toString());
-    }
-
+    
+    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
+        fenêtre_graphique.drawString(String.valueOf(joueur1.getScore()), 1750, 0);
+        }
 
 }
