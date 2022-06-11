@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import outils.OutilsJDBC;
-
+import java.util.Random;
 
 
 /*
@@ -57,30 +57,33 @@ public class Joueur extends Objet {
         return "Joueur{" + "saut=" + saut + '}';
     }
 
+
+//    public void misAjourScore(Objet objet){
+//        if( super.collision(objet)==true ){
+//            super.setScore(super.getScore()+objet.getScore() );
+//            objet.setX(Random().nextInt(1776-objet.getLargeur()));
+//            objet.set(Random().nextInt(992-objet.getHauteur()));
+//        }
+//    }
+
+    
+
     public void misAjourScore(Objet objet){
         if( super.collision(objet)==true ){
             super.setScore(super.getScore()+objet.getScore() );
-            objet.setX(math.random().nextInt(1776-objet.getLargeur()));
-            objet.set(Random().nextInt(992-objet.getHauteur()));
+            Random newPosX = new Random();
+            Random newPosY = new Random();
+            objet.setX(newPosX.nextInt(1776-objet.getLargeur()));
+            objet.setY(newPosY.nextInt(992-objet.getHauteur()));
         }
     }
 
-    public void score(){
-        try {
+   
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/tp_jdbc_vs1tp1?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
-
-            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM objet WHERE id = ?;");
-            requete.setString(1,"Natacha");
-            ResultSet resultat = requete.executeQuery();
-            OutilsJDBC.afficherResultSet(resultat);
-
-            requete.close();
-            connexion.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    Object Getscore() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
+
 
