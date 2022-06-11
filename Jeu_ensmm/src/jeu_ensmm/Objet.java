@@ -49,8 +49,8 @@ public class Objet {
         this.score = score;
         try {
             switch (numSprite) {
-                case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;
-                case 2 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;
+                case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;  // apparence joueur 1
+                case 5 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;   // apparence joueur 2
                 default : this.setSprite(ImageIO.read(getClass().getResource("../resources/jungle.png"))); break;
             }
         } catch (IOException ex) {
