@@ -5,9 +5,15 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import static java.lang.Math.abs;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import java.util.Random;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -133,13 +139,19 @@ public class Objet {
         return (int) sprite.getWidth();
     }
     public boolean collision(Objet objet){
-        if((x>=objet.getSprite().getHeight()+objet.getX()) 
-           || (x+sprite.getHeight()<= objet.getX())
-           || (y>=objet.getY()+objet.getSprite().getWidth())
-           || (y+sprite.getWidth()<= objet.getY())){
-            return false;
-        } else{
+        if((this.x-objet.getX()<=objet.getSprite().getHeight()/2+this.getLargeur()/2) 
+           && (this.y-objet.getY()<=objet.getSprite().getWidth()/2+this.getHauteur()/2)){
+            System.out.println("yo");
+            Random newPosX =new Random();
+            Random newPosY =new Random();
+            this.setX(newPosX.nextInt(1776-objet.getLargeur()-3*32));
+            this.setY(newPosY.nextInt(992-objet.getHauteur()-32));
+            System.out.println(newPosX.nextInt(1776-objet.getLargeur()-3*32)/32);
+            System.out.println(newPosY.nextInt(992-objet.getHauteur()-32)/32);
+            
             return true;
+        } else{
+            return false;
         }
                     
     }
@@ -186,7 +198,27 @@ public class Objet {
         this.miseAJourCote();
         this.miseAJourVertical();
     }
-    
+    public int score(){
+        int score=0;
+        
+        try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/tp_jdbc_vs1tp1?serverTimezone=UTC", "etudiant", "YTDTvj9TR3CDYCmP");
+
+            PreparedStatement requete = connexion.prepareStatement("SELECT score FROM joueur WHERE id = ?");
+            requete.setInt(1,this.getId());
+            ResultSet resultat = requete.executeQuery();
+            score = resultat.getInt("score");
+            
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return score;
+    }
     public void rendu(Graphics2D contexte) {
         contexte.drawImage(this.sprite, (int) x, (int) y, null);
     }
