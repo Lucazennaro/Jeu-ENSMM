@@ -109,7 +109,7 @@ public class Pseudo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SalonAttente salon = new SalonAttente();
         salon.setVisible(true);
-        while (this.nombreDeJoueurs()<3.5){
+        while (this.nombreDeJoueurs()<15){
             String nbjoueur = "" + this.nombreDeJoueurs();
             salon.setjTextField1(nbjoueur);
         }
