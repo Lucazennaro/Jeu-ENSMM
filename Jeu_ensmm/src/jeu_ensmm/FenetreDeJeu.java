@@ -55,13 +55,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         
         // ESSAIS BASE DE DONNEES
         
-        this.jeu1.creationMonJoueur("Géralduca");
+       this.jeu1.creationMonJoueur("Géralduca");
        System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
        this.jeu1.addJoueur();
        System.out.println(this.jeu1.getListe());
-        
-        System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
-        //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
+       System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
    }
     public Graphics2D getContexte() {
         return this.contexte;
@@ -83,21 +81,14 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.jeu1.getJoueur().setDroite(true);
             System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
             System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
-//            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-
              this.jeu1.getJoueur().setHaut(true);
-//            System.out.println(jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
-
-            this.jeu1.getJoueur().setHaut(true);
-            
-//            
-        }
-        
+            this.jeu1.getJoueur().setHaut(true);                      
+        }    
     }
 
     public void keyReleased(KeyEvent evt) {
@@ -118,12 +109,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         }
 
     }
-//    public void AffichageScore(Joueur joueur1, Graphics2D fenetre_graphique){
-//        fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
-//        }
+    public void AffichageScore(Joueur joueur1, Graphics2D fenetre_graphique){
+        fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
+        }
     
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) {      
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
         fenetre.getJeu().rendu(fenetre.getContexte());     
@@ -133,11 +123,5 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         return jeu1;
     }
     
-
-    
-
-    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
-        fenêtre_graphique.drawString(String.valueOf(joueur1.getScore()), 1750, 0);
-        }
 
 }
