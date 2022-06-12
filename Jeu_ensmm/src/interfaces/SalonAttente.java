@@ -104,6 +104,7 @@ public class SalonAttente extends javax.swing.JFrame {
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
         fenetre.getJeu().rendu(fenetre.getContexte());// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
