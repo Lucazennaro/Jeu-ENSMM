@@ -281,7 +281,23 @@ public class Jeu {
          catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+    }
+    public void supprimeMonJoueur(){
+          try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+            
+            PreparedStatement requete = connexion.prepareStatement("DELETE FROM joueur WHERE id_Joueur = ?");
+            requete.setInt(1, this.joueur.getId());
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
     
