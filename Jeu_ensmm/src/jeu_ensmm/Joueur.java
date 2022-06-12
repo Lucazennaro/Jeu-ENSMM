@@ -53,6 +53,7 @@ public class Joueur extends Objet {
     public String toString() {
         return "Joueur{" + "saut=" + saut + '}';
     }
+    
 
 
 //    public void misAjourScore(Objet objet){
@@ -77,9 +78,7 @@ public class Joueur extends Objet {
 
    
 
-    Object Getscore() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
 
