@@ -94,9 +94,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.jeu1.getJoueur().setBas(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getJoueur().setHaut(true);
-            
-//            
+            this.jeu1.getJoueur().setHaut(true);     
+        }
+        if (evt.getKeyCode() == evt.VK_ESCAPE) {
+            this.dispose();
+            this.jeu1.videTable("joueur");
         }
     }
 
@@ -113,6 +115,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         }
         if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getListe().get(0).setHaut(false);
+   
         }
     }
 //    public void AffichageScore(Joueur joueur1, Graphics2D fenetre_graphique){
@@ -132,8 +135,6 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 
     
 
-    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
-        fenêtre_graphique.drawString(String.valueOf(joueur1.getScore()), 1750, 0);
-        }
+   
 
 }
