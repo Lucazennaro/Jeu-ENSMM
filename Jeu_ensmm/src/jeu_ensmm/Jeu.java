@@ -29,6 +29,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class Jeu {
     private Map map ;
@@ -85,6 +86,35 @@ public class Jeu {
     @Override
     public String toString() {
         return "Jeu{" + "liste=" + liste + '}';
+    }
+
+    public void misAjourScore(Objet objet){
+        if( this.Collision(objet)==true ){
+            this.joueur.setScore(this.joueur.getScore()+objet.getScore() );
+            Random newPosX = new Random();
+            Random newPosY = new Random();
+            objet.setX(newPosX.nextInt(1776-objet.getLargeur()));
+            objet.setY(newPosY.nextInt(992-objet.getHauteur()));
+        }
+    }
+
+    public boolean Collision(Objet objet){
+        if((int) (this.getListe().get(this.getListe().indexOf(objet)).getY()/32)== joueur.getY()/32
+                    && (int) (this.getListe().get(this.getListe().indexOf(objet)).getX()/32)== joueur.getX()/32){
+            Random X =new Random();
+            Random Y =new Random();
+            int newPosX =X.nextInt(1776-objet.getLargeur()-3*32);
+            int newPosY = Y.nextInt(992-objet.getHauteur()-32);
+            while(this.map.getPlateforme()[newPosY][newPosX]!=0){
+            objet.setX(newPosX);
+            objet.setY(newPosY);
+        
+       } 
+            return true;
+        }
+            else{
+           return false;
+        }
     }
 
     

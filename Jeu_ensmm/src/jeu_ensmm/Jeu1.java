@@ -34,7 +34,7 @@ public class Jeu1 {
         }
         
         this.unPersonnage = new Personnage();
-//        this.unePlateforme = new Plateforme();
+        this.unePlateforme = new Map();
     }
     
     public void rendu(Graphics2D contexte){
