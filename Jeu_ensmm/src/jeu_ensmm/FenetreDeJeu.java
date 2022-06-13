@@ -86,9 +86,17 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.jeu1.getJoueur().setGauche(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-             this.jeu1.getJoueur().setHaut(true);
+
             this.jeu1.getJoueur().setHaut(true);                      
         }    
+
+            this.jeu1.getJoueur().setHaut(true);     
+        }
+        if (evt.getKeyCode() == evt.VK_ESCAPE) {
+            this.dispose();
+            this.jeu1.supprimeMonJoueur();
+        }
+
     }
 
     public void keyReleased(KeyEvent evt) {
@@ -106,6 +114,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 
         if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getListe().get(0).setHaut(false);
+   
         }
 
     }

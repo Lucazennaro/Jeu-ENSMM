@@ -57,6 +57,7 @@ public class Joueur extends Objet {
     public String toString() {
         return "Joueur{" + "saut=" + saut + '}';
     }
+    
 
 
 //    public void misAjourScore(Objet objet){

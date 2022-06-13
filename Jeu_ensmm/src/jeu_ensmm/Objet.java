@@ -50,7 +50,7 @@ public class Objet {
         try {
             switch (numSprite) {
                 case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;  // apparence joueur 1
-                case 5 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;   // apparence joueur 2
+                case 2 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;   // apparence joueur 2
                 default : this.setSprite(ImageIO.read(getClass().getResource("../resources/jungle.png"))); break;
             }
         } catch (IOException ex) {
@@ -219,7 +219,7 @@ public class Objet {
             ex.printStackTrace();
         }
         return score;
-    }
+   }
     public void rendu(Graphics2D contexte) {
         contexte.drawImage(this.sprite, (int) x, (int) y, null);
     }
