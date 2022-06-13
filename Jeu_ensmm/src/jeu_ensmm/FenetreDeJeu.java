@@ -42,6 +42,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.pack();
         //Creation du jeu
         this.jeu1 = new Jeu ();
+       // this.jeu1.addJoueur();
+        
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
         this.jLabel1.setIcon(new ImageIcon(framebuffer));
@@ -53,14 +55,18 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         
         // ESSAIS BASE DE DONNEES
         
+        this.jeu1.creationMonJoueur("Géralduca");
+       System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
+       this.jeu1.addJoueur();
+       System.out.println(this.jeu1.getListe());
         
         System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
         //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
-    }
-
+   }
     public Graphics2D getContexte() {
-        return contexte;
+        return this.contexte;
     }
+    
     public void actionPerformed(ActionEvent e){
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
@@ -77,8 +83,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true);
-//            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
-//            System.out.println((int) this.jeu1.getListe().get(0).getY()/32);
+            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+            System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
@@ -88,9 +94,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.jeu1.getJoueur().setBas(true);
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getJoueur().setHaut(true);
-            
-//            
+            this.jeu1.getJoueur().setHaut(true);     
+        }
+        if (evt.getKeyCode() == evt.VK_ESCAPE) {
+            this.dispose();
+            this.jeu1.supprimeMonJoueur();
         }
     }
 
@@ -107,21 +115,26 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         }
         if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getListe().get(0).setHaut(false);
+   
         }
     }
+//    public void AffichageScore(Joueur joueur1, Graphics2D fenetre_graphique){
+//        fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
+//        }
     
     public static void main(String[] args) {
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
-        fenetre.getJeu().rendu(fenetre.getContexte());
+        fenetre.getJeu().rendu(fenetre.getContexte());     
     }
 
     public Jeu getJeu() {
         return jeu1;
     }
     
-    public void AffichageScore(Joueur joueur1, Graphics2D fenêtre_graphique){
-        fenêtre_graphique.drawString(String.valueOf(joueur1.Getscore()), 1750, 0);
-        }
+
+    
+
+   
 
 }

@@ -40,11 +40,13 @@ public class Jeu {
         this.map = new Map(2, 2);
 
         this.liste = new ArrayList();
+       // this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,2); 
+        //this.liste.add(joueur);
+        //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
 
-        this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,3);
-        this.liste.add(joueur);
-        this.liste.add(new Objet(2, "J1",150,600,false,false,false,false,12,0,6));
-        //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,1));
+       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
+        this.liste.add(new Objet(2, "J1",150,575,false,false,false,false,12,0,2));    // a enlever
+//        this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,1));
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
     }
@@ -80,6 +82,11 @@ public class Jeu {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Jeu{" + "liste=" + liste + '}';
+    }
+
     
     public void miseAJourV(Objet objet){
 //        System.out.println((int) (objet.getX()/32));
@@ -94,7 +101,7 @@ public class Jeu {
         }
                 if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isHaut()== true){
                     this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
-                    System.out.println(this.getListe().get(this.getListe().indexOf(objet)).isHaut());
+//                    System.out.println(this.getListe().get(this.getListe().indexOf(objet)).isHaut());
                     
                 }
                 if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isBas()== true){
@@ -198,7 +205,7 @@ public class Jeu {
         }
    }
     public void creationMonJoueur (String nom){
-        joueur = new Joueur(0, false, nom,0,0,false,false,false,false,12,0,2) ;
+        joueur = new Joueur(0, false, nom,0,0,false,false,false,false,12,0,1) ;
         joueur.setId(this.nombreDeJoueurs()+1);
         this.setJoueur(joueur);
         
@@ -229,6 +236,56 @@ public class Jeu {
         this.liste.add(this.getJoueur().getId()-1, this.getJoueur());
         
     }
+    public void miseAJourDataBase() {
+         try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id_joueur = ?");
+            requete.setInt(1, this.joueur.getX());
+            requete.setInt(2, this.joueur.getY());
+            requete.setInt(3, this.joueur.getScore());
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    public void videTable(String nomTable){
+         try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement statement = connexion.prepareStatement("TRUNCATE TABLE "+ nomTable);
+            statement.execute() ;
+            connexion.close();
+         }
+         catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void supprimeMonJoueur(){
+          try {
+
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+            
+            PreparedStatement requete = connexion.prepareStatement("DELETE FROM joueur WHERE id_Joueur = ?");
+            requete.setInt(1, this.joueur.getId());
+            System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
+            connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     
     
     public void rendu(Graphics2D contexte){
@@ -240,12 +297,16 @@ public class Jeu {
         }
         for(int i =0; i < this.liste.size(); i+=1){
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
+            if(this.liste.get(i).getId()==1){
+            contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20);
+            
         }
-        } 
-
-    void Afficher(Graphics2D contexteBuffer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
+
+//    void Afficher(Graphics2D contexteBuffer) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
    
 }  
