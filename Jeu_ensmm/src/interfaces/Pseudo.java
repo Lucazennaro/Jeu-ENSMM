@@ -10,7 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JTextField;
+import jeu_ensmm.FenetreDeJeu;
 
 /**
  *
@@ -85,7 +87,7 @@ public class Pseudo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     public int nombreDeJoueurs(){
         int nbJoueurs = 0;
         try {
@@ -109,12 +111,8 @@ public class Pseudo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SalonAttente salon = new SalonAttente();
         salon.setVisible(true);
-        salon.setjTextField1("0");
+        salon.setjTextField1(""+this.nombreDeJoueurs());
         this.dispose();
-        while (this.nombreDeJoueurs()<3.5){
-            String nbjoueur = "" + this.nombreDeJoueurs();
-            salon.setjTextField1(nbjoueur);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
