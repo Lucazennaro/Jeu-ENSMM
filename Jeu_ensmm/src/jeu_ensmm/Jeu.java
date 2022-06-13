@@ -33,17 +33,11 @@ import java.sql.SQLException;
 public class Jeu {
     private Map map ;
     private  ArrayList<Objet> liste;
-    private BufferedImage decor;
     private Joueur joueur; 
 
 
     public Jeu() {
-         try {
-            this.decor = ImageIO.read(getClass().getResource("../resources/Chatelet_map.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(Jeu1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.map = new Map();
+        this.map = new Map(2, 2);
 
         this.liste = new ArrayList();
        // this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,2); 
@@ -65,10 +59,6 @@ public class Jeu {
         return liste;
     }
 
-    public BufferedImage getDecor() {
-        return decor;
-    }
-
     public Joueur getJoueur() {
         return joueur;
     }
@@ -81,9 +71,6 @@ public class Jeu {
         this.liste = liste;
     }
 
-    public void setDecor(BufferedImage decor) {
-        this.decor = decor;
-    }
 
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
@@ -302,7 +289,7 @@ public class Jeu {
     
     
     public void rendu(Graphics2D contexte){
-        contexte.drawImage(this.decor, 0, 0, null);
+        contexte.drawImage(this.map.getDecor(), 0, 0, null);
         for (int i = 0; i < map.getHauteur(); i++) {
             for (int j = 0; j < map.getLargeur(); j++) {
                 contexte.drawImage(map.getTuiles()[map.getPlateforme()[i][j]], j * map.getTailleTuile(), i * map.getTailleTuile(), null);
