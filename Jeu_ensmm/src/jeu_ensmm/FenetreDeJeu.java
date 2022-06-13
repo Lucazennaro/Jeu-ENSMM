@@ -42,7 +42,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.pack();
         //Creation du jeu
         this.jeu1 = new Jeu ();
-       // this.jeu1.addJoueur();
+      
+       this.jeu1.creationMonJoueur("Pseudo");
+       //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
+       this.jeu1.addJoueurTable();
+       this.jeu1.addJoueursListe();
+       System.out.println(this.jeu1.getListe());
         
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -55,10 +60,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         
         // ESSAIS BASE DE DONNEES
         
-        this.jeu1.creationMonJoueur("Géralduca");
-       System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
-       this.jeu1.addJoueur();
-       System.out.println(this.jeu1.getListe());
+        
         
         System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
         //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
@@ -82,9 +84,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
-            this.jeu1.getJoueur().setDroite(true);
-            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
-            System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
+            this.jeu1.getJoueur().setDroite(true) ;
+            //System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+           // System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
@@ -100,6 +102,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.dispose();
             this.jeu1.supprimeMonJoueur();
         }
+    System.out.println("  x= "+this.getJeu().getListe().get(0).getX()+"  y=  "+this.getJeu().getListe().get(0).getY());
     }
 
     public void keyReleased(KeyEvent evt) {
@@ -125,7 +128,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public static void main(String[] args) {
         FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
-        fenetre.getJeu().rendu(fenetre.getContexte());     
+        fenetre.getJeu().rendu(fenetre.getContexte()); 
+        
     }
 
     public Jeu getJeu() {
