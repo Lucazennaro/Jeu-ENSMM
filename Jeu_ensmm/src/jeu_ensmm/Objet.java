@@ -44,8 +44,12 @@ public class Objet {
         try {
             switch (numSprite) {
                 case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;
-                case 2 : this.setSprite(ImageIO.read(getClass().getResource("../resources/banane.png"))); break;
-                default : this.setSprite(ImageIO.read(getClass().getResource("../resources/jungle.png"))); break;
+                case 2 : this.setSprite(ImageIO.read(getClass().getResource("../resources/creeper.jpg"))); break;
+                case 3 : this.setSprite(ImageIO.read(getClass().getResource("../resources/pig.png"))); break;
+                case 4 : this.setSprite(ImageIO.read(getClass().getResource("../resources/slender.png"))); break;
+                case 5 : this.setSprite(ImageIO.read(getClass().getResource("../resources/cow.png"))); break;
+                case 6 : this.setSprite(ImageIO.read(getClass().getResource("../resources/beer.png"))); break;
+                default : this.setSprite(ImageIO.read(getClass().getResource("../resources/cow.png"))); break;
             }
         } catch (IOException ex) {
             Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
