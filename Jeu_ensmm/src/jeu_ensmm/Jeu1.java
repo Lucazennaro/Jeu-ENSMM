@@ -20,7 +20,7 @@ public class Jeu1 {
     
     private BufferedImage decor;
     private Personnage unPersonnage;
-    private Plateforme unePlateforme;
+    private Map unePlateforme;
 
     public Personnage getUnPersonnage() {
         return unPersonnage;
@@ -34,7 +34,7 @@ public class Jeu1 {
         }
         
         this.unPersonnage = new Personnage();
-        this.unePlateforme = new Plateforme();
+        this.unePlateforme = new Map();
     }
     
     public void rendu(Graphics2D contexte){

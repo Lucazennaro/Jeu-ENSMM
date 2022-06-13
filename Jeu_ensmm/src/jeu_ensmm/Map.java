@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  *
  * @author lbourger
  */
-public class Plateforme {
+public class Map {
     
     private BufferedImage[] tuiles;
     private int x;
@@ -91,7 +91,7 @@ public class Plateforme {
     {0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 23, 23, 0, 0, 0, 0, 0, 23, 128, 0, 0, 0, 0, 0, 0, 0, 23, 128, 23, 128, 0, 0, 0, 0, 23, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 23, 0, 0, 92, 0, 0, 0},
     {25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 23, 23, 25, 25, 25, 25, 25, 23, 23, 23, 25, 25, 25, 25, 25, 25, 25, 23, 25, 25, 25, 25, 25, 25, 23, 23, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 23, 23, 23, 25, 25, 25, 25, 25, 25}};
     
-    public Plateforme() {
+    public Map() {
         
         tuiles = new BufferedImage[176];
         try {
