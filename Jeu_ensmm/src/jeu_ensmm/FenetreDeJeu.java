@@ -83,9 +83,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true);
-            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
-            System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
-//            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
+//            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+//            System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
+//            System.out.println(this.jeu1.getMap().getPlateforme()[3][0]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
@@ -104,17 +104,17 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 
     public void keyReleased(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
-            this.jeu1.getListe().get(0).setDroite(false);
+            this.jeu1.getJoueur().setDroite(false);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
-            this.jeu1.getListe().get(0).setGauche(false);
+            this.jeu1.getJoueur().setGauche(false);
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getListe().get(0).setBas(false);
+            this.jeu1.getJoueur().setBas(false);
 //            System.out.println( this.jeu1.getListe().get(0).isHaut());
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getListe().get(0).setHaut(false);
+            this.jeu1.getJoueur().setHaut(false);
    
         }
     }
