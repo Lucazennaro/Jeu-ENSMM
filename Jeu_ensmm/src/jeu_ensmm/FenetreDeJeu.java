@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.Timer;
+import javax.swing.Timer; 
 import outils.OutilsJDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -107,17 +107,17 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 
     public void keyReleased(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
-            this.jeu1.getListe().get(0).setDroite(false);
+            this.jeu1.getJoueur().setDroite(false);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
-            this.jeu1.getListe().get(0).setGauche(false);
+            this.jeu1.getJoueur().setGauche(false);
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
-            this.jeu1.getListe().get(0).setBas(false);
+            this.jeu1.getJoueur().setBas(false);
 //            System.out.println( this.jeu1.getListe().get(0).isHaut());
         }
         if (evt.getKeyCode() == evt.VK_UP) {
-            this.jeu1.getListe().get(0).setHaut(false);
+            this.jeu1.getJoueur().setHaut(false);
    
         }
     }

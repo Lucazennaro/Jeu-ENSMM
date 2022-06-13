@@ -29,11 +29,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class Jeu {
     private Map map ;
     private  ArrayList<Objet> liste;
-    private BufferedImage decor;
     private Joueur joueur; 
 
 
@@ -65,10 +65,6 @@ public class Jeu {
         return liste;
     }
 
-    public BufferedImage getDecor() {
-        return decor;
-    }
-
     public Joueur getJoueur() {
         return joueur;
     }
@@ -81,44 +77,80 @@ public class Jeu {
         this.liste = liste;
     }
 
-    public void setDecor(BufferedImage decor) {
-        this.decor = decor;
-    }
 
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
     }
         
     public void miseAJourHorizontale(Objet objet){
-        if (this.getListe().get(this.getListe().indexOf(objet)).isDroite()== true || this.getListe().get(this.getListe().indexOf(objet)).isGauche()== true){
+        if(objet instanceof Joueur){
+            if (joueur.isDroite()== true || joueur.isGauche()== true){
+                
+//                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32] !=128){
+//                    
+//                    if (joueur.isDroite()== true){
+//                        System.out.println("yo");
+//                        joueur.setX(joueur.getX()-32);
+////                        joueur.setDroite(false);
+//        }   
+//                if (joueur.isGauche()== true){
+//                        joueur.setX(joueur.getX()+32);
+////                        joueur.setGauche(false);
+//        }
+                
+                
+                
+                
+                
                 this.getListe().get(this.getListe().indexOf(objet)).miseAJourCote();
+            }
+        }
+    }
+    //}
+
+    public void miseAjourScore(Objet objet){
+        if( this.Collision(objet)==true ){
+            this.joueur.setScore(this.joueur.getScore()+objet.getScore());
         }
     }
 
-    @Override
-    public String toString() {
-        return "Jeu{" + "liste=" + liste + '}';
+    public boolean Collision(Objet objet){
+        if((int) (this.getListe().get(this.getListe().indexOf(objet)).getY()/32)== joueur.getY()/32
+                    && (int) (this.getListe().get(this.getListe().indexOf(objet)).getX()/32)== joueur.getX()/32){
+            Random X =new Random();
+            Random Y =new Random();
+            int newPosX = X.nextInt(1776-objet.getLargeur());
+            int newPosY = Y.nextInt(992-objet.getHauteur()-32);
+            while(this.map.getPlateforme()[newPosY][newPosX]!=0){
+            objet.setX(newPosX);
+            objet.setY(newPosY);
+        
+       } 
+            return true;
+        }
+            else{
+           return false;
+        }
     }
 
-    
     public void miseAJourV(Objet objet){
 //        System.out.println((int) (objet.getX()/32));
 
         if(objet instanceof Joueur){
-            if (this.getListe().get(this.getListe().indexOf(objet)).isHaut()== true || this.getListe().get(this.getListe().indexOf(objet)).isBas()== true){
+            if (joueur.isHaut()== true || joueur.isBas()== true){
 //                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
 //                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
 //                }
-                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0 && this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32] !=128){
-                    this.getListe().get(this.getListe().indexOf(objet)).setBas(false);
+                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) objet.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32][(int) objet.getX()/32] !=128){
+                    joueur.setBas(false);
         }
-                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isHaut()== true){
-                    this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
+                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]== 128 && joueur.isHaut()== true){
+                    joueur.setHaut(true);
 //                    System.out.println(this.getListe().get(this.getListe().indexOf(objet)).isHaut());
                     
                 }
-                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isBas()== true){
-                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]== 128 && joueur.isBas()== true){
+                    joueur.setBas(true);
                     
                 }
                 
@@ -152,7 +184,7 @@ public class Jeu {
                 this.miseAJourV(this.liste.get(i));
                 this.miseAJourHorizontale(this.liste.get(i));
                 if(!(this.liste.get(i) instanceof Joueur)){
-                    this.liste.get(i).collision(joueur);
+                    joueur.collision(this.liste.get(i));
                 }
             }
         }
@@ -327,7 +359,35 @@ public class Jeu {
     
     
     public void rendu(Graphics2D contexte){
-        contexte.drawImage(this.decor, 0, 0, null);
+    
+//    public void miseAJourV(Objet objet){
+////        System.out.println((int) (objet.getX()/32));
+//
+//        if(objet instanceof Joueur){
+//            if (this.getListe().get(this.getListe().indexOf(objet)).isHaut()== true || this.getListe().get(this.getListe().indexOf(objet)).isBas()== true){
+////                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+////                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+////                }
+//                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0 && this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32] !=128){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setBas(false);
+//        }
+//                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isHaut()== true){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setHaut(true);
+////                    System.out.println(this.getListe().get(this.getListe().indexOf(objet)).isHaut());
+//                    
+//                }
+//                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]== 128 && objet.isBas()== true){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+//                    
+//                }
+//                
+//        }
+//            if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+//                    this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
+//                    this.getListe().get(this.getListe().indexOf(objet)).setHaut(false);
+//                }
+//            this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
+//        }
         for (int i = 0; i < map.getHauteur(); i++) {
             for (int j = 0; j < map.getLargeur(); j++) {
                 contexte.drawImage(map.getTuiles()[map.getPlateforme()[i][j]], j * map.getTailleTuile(), i * map.getTailleTuile(), null);
@@ -355,3 +415,4 @@ public class Jeu {
 
     
    
+        contexte.drawImage(this.map.getDecor(), 0, 0, null);

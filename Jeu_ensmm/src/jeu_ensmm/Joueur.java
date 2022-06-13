@@ -66,15 +66,15 @@ public class Joueur extends Objet {
 
     
 
-    public void misAjourScore(Objet objet){
-        if( super.collision(objet)==true ){
-            super.setScore(super.getScore()+objet.getScore() );
-            Random newPosX = new Random();
-            Random newPosY = new Random();
-            objet.setX(newPosX.nextInt(1776-objet.getLargeur()));
-            objet.setY(newPosY.nextInt(992-objet.getHauteur()));
-        }
-    }
+//    public void misAjourScore(Objet objet){
+//        if( super.collision(objet)==true ){
+//            super.setScore(super.getScore()+objet.getScore() );
+//            Random newPosX = new Random();
+//            Random newPosY = new Random();
+//            objet.setX(newPosX.nextInt(1776-objet.getLargeur()));
+//            objet.setY(newPosY.nextInt(992-objet.getHauteur()));
+//        }
+//    }
 
    
 
