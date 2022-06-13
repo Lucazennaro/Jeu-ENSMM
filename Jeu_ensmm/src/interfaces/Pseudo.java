@@ -87,18 +87,7 @@ public class Pseudo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public static void wait(int ms)
-    {
-        try
-        {
-            Thread.sleep(ms);
-        }
-        catch(InterruptedException ex)
-        {
-            Thread.currentThread().interrupt();
-        }
-    }
-    
+ 
     public int nombreDeJoueurs(){
         int nbJoueurs = 0;
         try {
