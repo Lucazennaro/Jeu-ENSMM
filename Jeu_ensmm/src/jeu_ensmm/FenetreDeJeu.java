@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.Timer;
+import javax.swing.Timer; 
 import outils.OutilsJDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
