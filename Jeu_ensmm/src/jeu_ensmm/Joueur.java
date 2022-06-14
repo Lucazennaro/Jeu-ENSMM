@@ -49,10 +49,10 @@ public class Joueur extends Objet {
         return saut;
     }
 
-    @Override
-    public String toString() {
-        return "Joueur{" + "saut=" + saut + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Joueur{" + "saut=" + saut + '}';
+//    }
     
 
 

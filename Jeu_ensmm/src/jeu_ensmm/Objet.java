@@ -47,6 +47,7 @@ public class Objet {
         this.vitesse = vitesse;
         
         this.score = score;
+        
         try {
             switch (numSprite) {
                 case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;
