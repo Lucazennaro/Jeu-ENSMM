@@ -38,7 +38,7 @@ public class Jeu {
 
 
     public Jeu() {
-
+        this.map = new Map(2,2);
         this.liste = new ArrayList();
         //this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,1); 
        //this.liste.add(joueur);
