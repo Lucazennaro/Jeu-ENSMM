@@ -112,7 +112,7 @@ public class SalonAttente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FenetreDeJeu fenetre = new FenetreDeJeu();
+        FenetreDeJeu fenetre = new FenetreDeJeu("luca");
         fenetre.setVisible(true);
         fenetre.getJeu().rendu(fenetre.getContexte());// TODO add your handling code here:
         this.dispose();

@@ -35,6 +35,7 @@ public class Joueur extends Objet {
         super(id, nom, x, y, gauche, droite,  haut, bas, vitesse, score, numSprite);
         this.setVitesse(12);
         this.saut = saut;
+        this.setVitesse(12);
 //        try {
 //            this.setSprite(ImageIO.read(getClass().getResource("../resources/donkeyKong.png")));
 //        } catch (IOException ex) {
