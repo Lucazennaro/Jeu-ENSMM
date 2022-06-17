@@ -240,13 +240,11 @@ public class Jeu {
     public void creationMonJoueur (String nom){
         joueur = new Joueur(1, false, nom,0,0,false,false,false,false,0,0,1) ;
         joueur.setId(this.nombreDeJoueurs()+1);
-        this.setJoueur(joueur);
-        
+        this.setJoueur(joueur);  
     }
     
     public void addJoueurTable() {
         try {
-
             Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
