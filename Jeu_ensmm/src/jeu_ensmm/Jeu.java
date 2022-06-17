@@ -81,12 +81,12 @@ public class Jeu {
         if(objet instanceof Joueur){
             if (joueur.isDroite()== true || joueur.isGauche()== true){
                 //System.out.println("ok");
-                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
+                if (this.map.getPlateforme()[(int) joueur.getY()/32 -1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
                     //System.out.println(12); 
-                    joueur.setX(joueur.getX()-32);
+                    joueur.setX(joueur.getX()-16);
                 }   
-                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
-                        joueur.setX(joueur.getX()+32);
+                if (this.map.getPlateforme()[(int) joueur.getY()/32 -1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
+                        joueur.setX(joueur.getX()+16);
                         //System.out.println(1);
 
                 }              
@@ -133,6 +133,7 @@ public class Jeu {
             if (this.joueur.isHaut()== true || this.joueur.isBas()== true){
                 if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) objet.getX()/32]!=0 && this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32] !=128){
                     this.joueur.setBas(false);
+                    this.joueur.setY((int) this.joueur.getY()/32 +32);
                 }       
                 if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32]== 128 && this.joueur.isBas()== true){
                     this.joueur.setBas(true); 
@@ -354,7 +355,7 @@ public class Jeu {
             }
         }
         for(int i =0; i < this.liste.size(); i+=1){
-            contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()+32, null);
+            contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
             if(this.liste.get(i).getId()==1){
 //                System.out.println("coucou" + this.liste.get(i).getY()  );
             //contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20);
