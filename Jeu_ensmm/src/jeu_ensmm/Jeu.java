@@ -40,8 +40,8 @@ public class Jeu {
     public Jeu() {
         
         this.map = new Map(1,1);
-
         this.liste = new ArrayList();
+        
         //this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,1); 
        //this.liste.add(joueur);
         //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
@@ -238,7 +238,7 @@ public class Jeu {
    }
     
     public void creationMonJoueur (String nom){
-        joueur = new Joueur(1, false, nom,2,2,false,false,false,false,12,0,1) ;
+        Joueur joueur = new Joueur(1, false, nom,2,2,false,false,false,false,12,0,1) ;
         joueur.setId(this.nombreDeJoueurs()+1);
         this.setJoueur(joueur); 
     }
@@ -281,7 +281,7 @@ public class Jeu {
                     int x = resultat.getInt("x");
                     int y = resultat.getInt("y");
                     int score = resultat.getInt("score");
-                    joueur = new Joueur(id, false, pseudo , x, y, false, false, false, false,0,score,id) ;
+                    Joueur joueur = new Joueur(id, false, pseudo , x, y, false, false, false, false,0,score,id) ;
                     this.liste.add( joueur );
                     //System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
