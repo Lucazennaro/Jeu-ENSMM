@@ -171,7 +171,6 @@ public class Jeu {
                     this.miseAjourScore((this.liste.get(i)));
                 }
             }
-        System.out.println(joueur.getScore());
         }
 
     
@@ -239,7 +238,7 @@ public class Jeu {
    }
     
     public void creationMonJoueur (String nom){
-        joueur = new Joueur(1, false, nom,0,0,false,false,false,false,12,0,1) ;
+        joueur = new Joueur(1, false, nom,0,0,false,false,false,false,0,0,1) ;
         joueur.setId(this.nombreDeJoueurs()+1);
         this.setJoueur(joueur);
         

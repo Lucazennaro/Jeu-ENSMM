@@ -30,7 +30,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     private Jeu jeu1;
     private Timer timer;
 
-    public FenetreDeJeu() {
+    public FenetreDeJeu(String nom) {
         // initialisation de la fenetre
         this.setSize(1760, 992);
         this.setResizable(false);
@@ -43,7 +43,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         //Creation du jeu
         this.jeu1 = new Jeu ();
       
-       this.jeu1.creationMonJoueur("Pseudo");
+       this.jeu1.creationMonJoueur(nom);
        //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
        this.jeu1.addJoueurTable();
        this.jeu1.addJoueursListe();
@@ -126,7 +126,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 //        }
     
     public static void main(String[] args) {
-        FenetreDeJeu fenetre = new FenetreDeJeu();
+        FenetreDeJeu fenetre = new FenetreDeJeu("joueur");
         fenetre.setVisible(true);
         fenetre.getJeu().rendu(fenetre.getContexte()); 
         
