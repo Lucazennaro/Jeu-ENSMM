@@ -243,7 +243,6 @@ public class Jeu {
     public void creationMonJoueur (String nom){
         joueur.setNom(nom);
         joueur.setId(this.nombreDeJoueurs()+1);
-        this.liste.add(joueur);
     }
     
     public void addJoueurTable() {
@@ -252,8 +251,8 @@ public class Jeu {
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
             requete.setInt(1, this.getJoueur().getId() );
-            requete.setString(2,this.getJoueur().getNom());
-            requete.setInt(3,this.getJoueur().getX() );
+            requete.setString(2, this.getJoueur().getNom());
+            requete.setInt(3,this.getJoueur().getX());
             requete.setInt(4, this.getJoueur().getY());
             requete.setInt(5, this.getJoueur().getId());
             requete.setInt(6, 0 );
@@ -287,7 +286,8 @@ public class Jeu {
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
                         this.liste.add(id-1, joueur);
                     }
-                    System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
+                    this.liste.add(id-1, joueur);
+//                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
             }     
         }
