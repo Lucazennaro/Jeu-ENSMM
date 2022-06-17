@@ -34,6 +34,7 @@ public class Joueur extends Objet {
     public Joueur(int id, boolean saut, String nom, int x, int y, boolean gauche, boolean droite, boolean haut, boolean bas, int vitesse, int score, int numSprite){//, BufferedImage sprite) {
         super(id, nom, x, y, gauche, droite, haut, bas, vitesse, score, numSprite);
         this.saut = saut;
+        this.setVitesse(12);
 //        try {
 //            this.setSprite(ImageIO.read(getClass().getResource("../resources/donkeyKong.png")));
 //        } catch (IOException ex) {

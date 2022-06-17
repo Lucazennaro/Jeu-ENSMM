@@ -150,6 +150,11 @@ public class Pseudo extends javax.swing.JFrame {
         });
     }
 
+    public String getjTextField1() {
+        return ""+jTextField1;
+    }
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

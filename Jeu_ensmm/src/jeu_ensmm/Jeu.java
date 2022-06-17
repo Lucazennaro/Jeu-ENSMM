@@ -171,7 +171,6 @@ public class Jeu {
                     this.miseAjourScore((this.liste.get(i)));
                 }
             }
-        System.out.println(joueur.getScore());
         }
 
     
