@@ -38,12 +38,8 @@ public class Jeu {
 
 
     public Jeu() {
-         try {
-            this.decor = ImageIO.read(getClass().getResource("../resources/Chatelet_map.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(Jeu1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.map = new Map();
+        
+        this.map = new Map(1,1);
 
         this.liste = new ArrayList();
         //this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,1); 
@@ -86,17 +82,17 @@ public class Jeu {
         if(objet instanceof Joueur){
             if (joueur.isDroite()== true || joueur.isGauche()== true){
                 
-//                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32] !=128){
-//                    
-//                    if (joueur.isDroite()== true){
-//                        System.out.println("yo");
-//                        joueur.setX(joueur.getX()-32);
-////                        joueur.setDroite(false);
-//        }   
-//                if (joueur.isGauche()== true){
-//                        joueur.setX(joueur.getX()+32);
-////                        joueur.setGauche(false);
-//        }
+                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32] !=128){
+                    
+                    if (joueur.isDroite()== true){
+                        System.out.println("yo");
+                        joueur.setX(joueur.getX()-32);
+//                        joueur.setDroite(false);
+        }   
+                if (joueur.isGauche()== true){
+                        joueur.setX(joueur.getX()+32);
+//                        joueur.setGauche(false);
+        }
                 
                 
                 
@@ -106,7 +102,7 @@ public class Jeu {
             }
         }
     }
-    //}
+    }
 
     public void miseAjourScore(Objet objet){
         if( this.Collision(objet)==true ){
@@ -414,5 +410,3 @@ public class Jeu {
         
 
     
-   
-        contexte.drawImage(this.map.getDecor(), 0, 0, null);
