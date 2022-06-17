@@ -47,7 +47,7 @@ public class Jeu {
         //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
 
        // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
-        this.liste.add(new Objet(2, "J1",150,575,false,false,false,false,12,0,6));    // a enlever
+//        this.liste.add(new Objet(2, "J1",150,575,false,false,false,false,12,0,6));    // a enlever
 //        this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,1));
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
         //liste.add(J1);
@@ -82,7 +82,7 @@ public class Jeu {
         if(objet instanceof Joueur){
             if (joueur.isDroite()== true || joueur.isGauche()== true){
                 
-                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32] !=128){
+                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128){
                     
                     if (joueur.isDroite()== true){
                         System.out.println("yo");
@@ -264,7 +264,7 @@ public class Jeu {
         }
    }
     public void creationMonJoueur (String nom){
-        joueur = new Joueur(1, false, nom,0,0,false,false,false,false,12,0,1) ;
+        joueur = new Joueur(1, false, nom,2,2,false,false,false,false,12,0,1) ;
         joueur.setId(this.nombreDeJoueurs()+1);
         this.setJoueur(joueur);
         
@@ -277,8 +277,8 @@ public class Jeu {
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
             requete.setInt(1, this.getJoueur().getId() );
             requete.setString(2,this.getJoueur().getNom());
-            requete.setInt(3, 0);
-            requete.setInt(4, 0);
+            requete.setInt(3,this.getJoueur().getX() );
+            requete.setInt(4, this.getJoueur().getY());
             requete.setInt(5, this.getJoueur().getId());
             requete.setInt(6, 0 );
             
