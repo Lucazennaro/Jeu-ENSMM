@@ -304,6 +304,7 @@ public class Jeu {
             requete.setInt(1, this.joueur.getX());
             requete.setInt(2, this.joueur.getY());
             requete.setInt(3, this.joueur.getScore());
+            requete.setInt(4, this.joueur.getId());
             System.out.println(requete);
             requete.executeUpdate();
 
