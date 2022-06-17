@@ -30,7 +30,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     private Jeu jeu1;
     private Timer timer;
 
-    public FenetreDeJeu() {
+    public FenetreDeJeu(String nom) {
         // initialisation de la fenetre
         this.setSize(1760, 992);
         this.setResizable(false);
@@ -41,9 +41,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.addKeyListener(this);
         this.pack();
         //Creation du jeu
-        this.jeu1 = new Jeu ();
+        this.jeu1 = new Jeu();
       
-       this.jeu1.creationMonJoueur("Pseudo");
+       this.jeu1.creationMonJoueur(nom);
        //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
        this.jeu1.addJoueurTable();
        this.jeu1.addJoueursListe();
@@ -85,7 +85,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true) ;
-            //System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+            System.out.println((int) this.jeu1.getJoueur().getVitesse() + "vitesse ");
            // System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
@@ -126,7 +126,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 //        }
     
     public static void main(String[] args) {
-        FenetreDeJeu fenetre = new FenetreDeJeu();
+        FenetreDeJeu fenetre = new FenetreDeJeu("joueur");
         fenetre.setVisible(true);
         fenetre.getJeu().rendu(fenetre.getContexte()); 
         

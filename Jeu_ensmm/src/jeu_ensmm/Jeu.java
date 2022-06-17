@@ -46,7 +46,7 @@ public class Jeu {
        //this.liste.add(joueur);
         //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
 
-       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
+      //  this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,1);
        // this.liste.add(new Objet(2, "J1",150,575,false,false,false,false,12,0,6));    // a enlever
 //        this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,1));
         //Joueur J1 = new Joueur(false, "J1",20,20,40,40,false,false,false,false,10,0);
@@ -83,16 +83,16 @@ public class Jeu {
         if(objet instanceof Joueur){
             if (joueur.isDroite()== true || joueur.isGauche()== true){
                 
-                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
-                    System.out.println(12);
-                    System.out.println("yo");
-                    joueur.setX(joueur.getX()-32);
-                }   
-                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
-                        joueur.setX(joueur.getX()+32);
-                        System.out.println(1);
-
-                }              
+//                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
+//                    System.out.println(12);
+//                    System.out.println("yo");
+//                    joueur.setX(joueur.getX()-32);
+//                }   
+//                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
+//                        joueur.setX(joueur.getX()+32);
+//                        System.out.println(1);
+//
+//                }              
             }
         }
             joueur.miseAJourCote();
@@ -241,8 +241,7 @@ public class Jeu {
     public void creationMonJoueur (String nom){
         joueur = new Joueur(1, false, nom,2,2,false,false,false,false,12,0,1) ;
         joueur.setId(this.nombreDeJoueurs()+1);
-        this.setJoueur(joueur);
-        
+        this.setJoueur(joueur); 
     }
     
     public void addJoueurTable() {
