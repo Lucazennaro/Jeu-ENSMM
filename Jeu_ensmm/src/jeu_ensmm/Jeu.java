@@ -39,10 +39,10 @@ public class Jeu {
 
     public Jeu() {
         
-        this.map = new Map(1,1);
+        this.map = new Map(2,2);
         this.liste = new ArrayList();
         
-        //this.joueur = new Joueur(1,false, "J1",0,0,false,false,false,false,12,0,1); 
+        joueur = new Joueur(0, false, "J1",64,64,false,false,false,false,12,0,1) ; 
        //this.liste.add(joueur);
         //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
 
@@ -95,8 +95,9 @@ public class Jeu {
                 }              
             }
         }
-            System.out.println(this.joueur.isDroite());
+            //System.out.println(this.joueur.getX());
             joueur.miseAJourCote();
+            
     }
 
     public void miseAjourScore(Objet objet){
@@ -131,11 +132,11 @@ public class Jeu {
    public void miseAJourV(Objet objet){
 
         if(objet instanceof Joueur){
-
+            
             if (this.joueur.isHaut()== true || this.joueur.isBas()== true){
                 if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) objet.getX()/32]!=0 && this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32] !=128){
                     this.joueur.setBas(false);
-                    this.joueur.setY((int) this.joueur.getY()/32 +32);
+                    System.out.println("vert");
                 }       
                 if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32]== 128 && this.joueur.isBas()== true){
                     this.joueur.setBas(true); 
@@ -240,9 +241,9 @@ public class Jeu {
    }
     
     public void creationMonJoueur (String nom){
-        Joueur joueur = new Joueur(1, false, nom,64,64,false,false,false,false,12,0,1) ;
+        joueur.setNom(nom);
         joueur.setId(this.nombreDeJoueurs()+1);
-        this.setJoueur(joueur); 
+        this.liste.add(joueur);
     }
     
     public void addJoueurTable() {
@@ -274,7 +275,7 @@ public class Jeu {
 
             Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
             
-            for (int id =1 ; id <= 2 ; id++){
+            for (int id =1 ; id <= 4 ; id++){
                 PreparedStatement requete = connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
                 requete.setInt(1, id );
                 ResultSet resultat = requete.executeQuery();
@@ -283,9 +284,11 @@ public class Jeu {
                     int x = resultat.getInt("x");
                     int y = resultat.getInt("y");
                     int score = resultat.getInt("score");
-                    Joueur joueur = new Joueur(id, false, pseudo , x, y, false, false, false, false,0,score,id) ;
-                    this.liste.add( joueur );
-                    //System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
+                    if(this.joueur.getId()!= id){
+                        Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
+                        this.liste.add(id-1, joueur);
+                    }
+                    System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
             }     
         }
@@ -358,8 +361,8 @@ public class Jeu {
         }
         for(int i =0; i < this.liste.size(); i+=1){
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
+            //System.out.println(this.joueur.getX());
             if(this.liste.get(i).getId()==1){
-//                System.out.println("coucou" + this.liste.get(i).getY()  );
             //contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20);
             
         }
