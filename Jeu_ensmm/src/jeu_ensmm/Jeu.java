@@ -80,15 +80,14 @@ public class Jeu {
 
         if(objet instanceof Joueur){
             if (joueur.isDroite()== true || joueur.isGauche()== true){
-                
-                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
-                    System.out.println(12);
-                    System.out.println("yo");
+                //System.out.println("ok");
+                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
+                    //System.out.println(12); 
                     joueur.setX(joueur.getX()-32);
                 }   
-                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
+                if (this.map.getPlateforme()[(int) joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
                         joueur.setX(joueur.getX()+32);
-                        System.out.println(1);
+                        //System.out.println(1);
 
                 }              
             }
@@ -171,7 +170,7 @@ public class Jeu {
                     this.miseAjourScore((this.liste.get(i)));
                 }
             }
-        System.out.println(joueur.getScore());
+        //System.out.println(joueur.getScore());
         }
 
     
@@ -359,7 +358,7 @@ public class Jeu {
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()+32, null);
             if(this.liste.get(i).getId()==1){
 //                System.out.println("coucou" + this.liste.get(i).getY()  );
-            contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20);
+            //contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20);
             
         }
         }
