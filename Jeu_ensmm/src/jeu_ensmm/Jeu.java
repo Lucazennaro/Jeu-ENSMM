@@ -370,6 +370,9 @@ public class Jeu {
         }
         }
     }
+    public void videListe(){
+        this.liste.clear();
+    }
 
 //    void Afficher(Graphics2D contexteBuffer) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
