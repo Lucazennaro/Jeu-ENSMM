@@ -41,7 +41,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.addKeyListener(this);
         this.pack();
         //Creation du jeu
-        this.jeu1 = new Jeu ();
+        this.jeu1 = new Jeu();
       
        this.jeu1.creationMonJoueur(nom);
        //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
@@ -73,6 +73,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
+        this.jeu1.videTable("joueur");
+        this.jeu1.addJoueurTable();
+        this.jeu1.addJoueursListe();
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
 //System.out.println(jeu1.getListe().get(0));
     }
@@ -85,7 +88,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true) ;
-            //System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
+            //System.out.println((int) this.jeu1.getJoueur().getVitesse() + "vitesse ");
            // System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
@@ -102,7 +105,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.dispose();
             this.jeu1.supprimeMonJoueur();
         }
-    System.out.println("  x= "+this.getJeu().getListe().get(0).getX()+"  y=  "+this.getJeu().getListe().get(0).getY());
+    System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
     }
 
     public void keyReleased(KeyEvent evt) {
