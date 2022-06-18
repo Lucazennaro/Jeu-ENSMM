@@ -33,7 +33,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     private Timer timer;
     
     public FenetreDeJeu(String nom) throws SQLException {
-        
+        System.out.println("départ");
         // initialisation de la fenetre
         this.setSize(1760, 992);
         this.setResizable(false);
@@ -119,8 +119,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
                 Logger.getLogger(FenetreDeJeu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("fermeture connexion");
-    System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
+     //   System.out.println("fermeture connexion");
+      System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
     }
 
     public void keyReleased(KeyEvent evt) {
