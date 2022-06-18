@@ -508,6 +508,7 @@ public class Jeu {
     
     public void affichageClassement(ArrayList classement){
         FinDePartie finDePartie = new FinDePartie();
+        finDePartie.setVisible(true);
         finDePartie.setjLabel2("1er  : "+classement.get(0));
         finDePartie.setjLabel3("2ème : "+classement.get(1));
         finDePartie.setjLabel4("3ème : "+classement.get(2));
