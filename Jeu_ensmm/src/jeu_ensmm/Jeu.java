@@ -341,7 +341,7 @@ public class Jeu {
             requete.setInt(3, this.joueur.getScore());
             requete.setInt(4, this.joueur.getId());
             requete.executeUpdate();
-
+            
             requete.close();
             
             for (int id =1 ; id <= 4 ; id++){
