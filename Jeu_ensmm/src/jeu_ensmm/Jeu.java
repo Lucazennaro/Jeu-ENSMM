@@ -42,11 +42,15 @@ public class Jeu {
        this.map = new Map(2,2);
        this.liste = new ArrayList<Objet>(14);
        //       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
-        for(int i=1; i<8; i++){
-        this.liste.add(new Objet(i, "malus", 32+i*187,50,false,false,false,false,12,-5,6)); 
-        this.liste.add(new Objet(i+1,"bonus", 32+i*233,20,false,false,false,false,12,15,5));
+        for(int i=1; i<5; i++){
+        this.liste.add(new Joueur (i,false , "Ji", 32+i*187,50,false,false,false,false,12,-5,6)); 
+        
         }// a enlever
         
+        for(int i=1; i<6; i++){
+        this.liste.add(new Objet(i+4, "malus", 32+i*187,50,false,false,false,false,12,-5,6)); 
+        this.liste.add(new Objet(i+5,"bonus", 32+i*233,20,false,false,false,false,12,15,5));
+        }
         this.joueur = new Joueur(1, false, "J1",64,64,false,false,false,false,8,0,1 );
         
     
@@ -179,6 +183,7 @@ public class Jeu {
                     this.miseAjourScore((this.liste.get(i)));
                 }
             }
+        this.liste.set(this.joueur.getId()-1 , joueur);
         }
 
     
@@ -359,12 +364,12 @@ public class Jeu {
                         this.liste.get(id-1).setY(y);
                         this.liste.get(id-1).setScore(score);
                     }
-                    this.liste.set(this.joueur.getId()-1 , joueur);
+                    //this.liste.set(this.joueur.getId()-1 , joueur);
 //                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 
                 requete2.close();
             } 
-          this.liste.set(this.joueur.getId()-1 , joueur);
+          //this.liste.set(this.joueur.getId()-1 , joueur);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -421,8 +426,7 @@ public class Jeu {
             }
         }
         for(int i =0; i < this.liste.size(); i+=1){
-            contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
-            //System.out.println(this.joueur.getX());           
+            contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);          
             if(this.liste.get(i) instanceof Joueur){
             contexte.drawString(this.liste.get(i).getNom()+ " Score : " + this.liste.get(i).getScore(), 10, 20+20*i); 
             }
