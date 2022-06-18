@@ -42,12 +42,12 @@ public class Jeu {
         this.map = new Map(2,2);
         this.liste = new ArrayList(14);
        
-        joueur = new Joueur(0, false, "J1",64,64,false,false,false,false,12,0,1) ;
+        joueur = new Joueur(1, false, "J1",64,64,false,false,false,false,12,0,1) ;
 //        for(int i=0; i<5; i++){
 //        this.liste.add(new Objet(2, "J1",150,150,false,false,false,false,12,-150,6)); 
 //        this.liste.add(new Objet(3, "J1",500,800,false,false,false,false,12,250,5));
 //        }
-        
+       
        //this.liste.add(joueur);
         //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
 
@@ -357,7 +357,7 @@ public class Jeu {
         //System.out.println("taille liste = " + this.liste.size()) ;
     }
          
-       
+
     public void miseAJourDataBase() {
          try {
                 
@@ -380,8 +380,9 @@ public class Jeu {
                     int y = resultat.getInt("y");
                     int score = resultat.getInt("score");
                     if(this.joueur.getId()!= id){
-                        Joueur joueur = new Joueur (id - 1, false, "pseudo",x,y,false,false,false,false,12,score,id);
-                        this.liste.set( id-1 , joueur) ;
+                        this.liste.get(this.liste.indexOf(id)-1).setX(x);
+                        this.liste.get(this.liste.indexOf(id)-1).setY(x);
+                        this.liste.get(this.liste.indexOf(id)-1).setScore(x);
                     }
                     this.liste.set(this.joueur.getId()-1 , joueur);
 //                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
