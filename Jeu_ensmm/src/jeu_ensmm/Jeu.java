@@ -303,7 +303,7 @@ public class Jeu {
 
             //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
             
-            for (int id =1 ; id <= 2 ; id++){
+            for (int id =1 ; id <= 4 ; id++){
                 PreparedStatement requete = this.connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
                 requete.setInt(1, id );
                 ResultSet resultat = requete.executeQuery();
@@ -342,7 +342,7 @@ public class Jeu {
 
             requete.close();
             
-            for (int id =1 ; id <= 2 ; id++){
+            for (int id =1 ; id <= 4 ; id++){
                 PreparedStatement requete2 = this.connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
                 requete2.setInt(1, id );
                 ResultSet resultat = requete2.executeQuery();
@@ -352,9 +352,9 @@ public class Jeu {
                     int y = resultat.getInt("y");
                     int score = resultat.getInt("score");
                     if(this.joueur.getId()!= id){
-                        this.liste.get(this.liste.indexOf(id-1)).setX(x);
-                        this.liste.get(this.liste.indexOf(id-1)).setY(x);
-                        this.liste.get(this.liste.indexOf(id-1)).setScore(x);
+                        this.liste.get(id-1).setX(x);
+                        this.liste.get(id-1).setY(y);
+                        this.liste.get(id-1).setScore(score);
                     }
                     this.liste.set(this.joueur.getId()-1 , joueur);
 //                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
