@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 import jeu_ensmm.FenetreDeJeu;
 
@@ -139,10 +141,15 @@ public class SalonAttente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FenetreDeJeu fenetre = new FenetreDeJeu(this.getjTextField2());
-        fenetre.setVisible(true);
-        fenetre.getJeu().rendu(fenetre.getContexte());// TODO add your handling code here:
-        this.dispose();
+       
+        try {
+            FenetreDeJeu fenetre = new FenetreDeJeu(this.getjTextField2());
+            fenetre.setVisible(true);
+            fenetre.getJeu().rendu(fenetre.getContexte());// TODO add your handling code here:
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(SalonAttente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

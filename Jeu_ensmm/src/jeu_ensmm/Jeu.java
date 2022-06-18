@@ -35,13 +35,13 @@ public class Jeu {
     private Map map ;
     private ArrayList<Objet> liste;
     private Joueur joueur; 
-
+    private Connection connexion ;
 
     public Jeu() {
         
         this.map = new Map(2,2);
         this.liste = new ArrayList();
-        
+       
         joueur = new Joueur(0, false, "J1",64,64,false,false,false,false,12,0,1) ; 
        //this.liste.add(joueur);
         //this.liste.add(new Joueur(1, false, "J1",0,0,false,false,false,false,12,0,2));
@@ -69,6 +69,15 @@ public class Jeu {
         this.map = map;
     }
 
+    public Connection getConnexion() {
+        return connexion;
+    }
+
+    public void setConnexion(Connection connexion) {
+        this.connexion = connexion;
+    }
+
+
     public void setListe(ArrayList<Objet> liste) {
         this.liste = liste;
     }
@@ -83,21 +92,19 @@ public class Jeu {
         if(objet instanceof Joueur){
             if (joueur.isDroite()== true || joueur.isGauche()== true){
                 
-                if (this.map.getPlateforme()[(int) joueur.getY()/32 -1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
-                    //System.out.println(12); 
+                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
+                    System.out.println(12);
+                    System.out.println("yo");
                     joueur.setX(joueur.getX()-16);
-                    System.out.println("ok");
                 }   
-                if (this.map.getPlateforme()[(int) joueur.getY()/32 -1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
+                if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
                         joueur.setX(joueur.getX()+16);
-                        //System.out.println(1);
+                        System.out.println(1);
 
                 }              
             }
         }
-            //System.out.println(this.joueur.getX());
-            joueur.miseAJourCote();
-            
+        joueur.miseAJourCote();
     }
 
     public void miseAjourScore(Objet objet){
@@ -129,33 +136,34 @@ public class Jeu {
         }
     }
 
-   public void miseAJourV(Objet objet){
+  public void miseAJourV(Objet objet){
 
         if(objet instanceof Joueur){
-            
+
             if (this.joueur.isHaut()== true || this.joueur.isBas()== true){
-                if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) objet.getX()/32]!=0 && this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32] !=128){
+                if ((this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32] !=128 ) || (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32+1] !=128)){
                     this.joueur.setBas(false);
-                    System.out.println("vert");
-                }       
-                if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32]== 128 && this.joueur.isBas()== true){
+                }
+                
+                if ((this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32]== 128 && this.joueur.isBas()== true) || (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32+1]== 128 && this.joueur.isBas()== true)) {
                     this.joueur.setBas(true); 
                 }
                 
-                if (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32]== 128 && this.joueur.isHaut()== true){
+                if ((this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32]== 128 && this.joueur.isHaut()== true) || (this.map.getPlateforme()[(int) this.joueur.getY()/32][(int) this.joueur.getX()/32+1]== 128 && this.joueur.isHaut()== true)){
                     this.joueur.setHaut(true);
                     this.joueur.setBas(false);   
-                }
+                }            
+                
             }
                 
         }
-            if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0){
+            if ((this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]==0) && (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32+1]==0) ){
                     this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
                     this.getListe().get(this.getListe().indexOf(objet)).setHaut(false);
                     
                 }
             if(!(objet instanceof Joueur)){
-                if (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0){
+                if ((this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0) || (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32+1]!=0) ) {
                         this.getListe().get(this.getListe().indexOf(objet)).setBas(false);
                 }
             }
@@ -180,14 +188,14 @@ public class Jeu {
     public int nombreDeJoueurs(){
         int nbJoueurs = 0;
         try {
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+            
                     
-            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbJoueurs FROM joueur ;");
+            PreparedStatement requete = this.connexion.prepareStatement("SELECT COUNT(*) AS nbJoueurs FROM joueur ;");
             ResultSet resultat = requete.executeQuery();
             resultat.next();
             nbJoueurs = resultat.getInt("nbJoueurs") ;
             requete.close();
-            connexion.close();
+            //connexion.close();
             
 
         } catch (SQLException ex) {
@@ -199,14 +207,14 @@ public class Jeu {
     public int nombreObjets(){
         int nbObjets = 0;
         try {
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
                     
-            PreparedStatement requete = connexion.prepareStatement("SELECT COUNT(*) AS nbObjets FROM objet ;");
+            PreparedStatement requete = this.connexion.prepareStatement("SELECT COUNT(*) AS nbObjets FROM objet ;");
             ResultSet resultat = requete.executeQuery();
             resultat.next();
             nbObjets = resultat.getInt("nbobjets") ;
             requete.close();
-            connexion.close();
+            //connexion.close();
             
 
         } catch (SQLException ex) {
@@ -219,9 +227,9 @@ public class Jeu {
 
         try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
 
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO objet VALUES (?,?,?,?,?,?)");
+            PreparedStatement requete = this.connexion.prepareStatement("INSERT INTO objet VALUES (?,?,?,?,?,?)");
             requete.setInt(1, idObjet);
             requete.setString(2,nom);
             requete.setInt(3, x);
@@ -233,7 +241,7 @@ public class Jeu {
             requete.executeUpdate();
 
             requete.close();
-            connexion.close();
+            //connexion.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -247,7 +255,30 @@ public class Jeu {
     
     public void addJoueurTable() {
         try {
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+
+            PreparedStatement requete = this.connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
+            requete.setInt(1, this.getJoueur().getId() );
+            requete.setString(2, this.getJoueur().getNom());
+            requete.setInt(3,this.getJoueur().getX());
+            requete.setInt(4, this.getJoueur().getY());
+            requete.setInt(5, this.getJoueur().getId());
+            requete.setInt(6, 0 );
+            
+            //System.out.println(requete);
+            requete.executeUpdate();
+
+            requete.close();
+            //connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }  
+    }
+    public void addJoueurTableSansCo(Connection connexion) throws SQLException {
+       
+            try {
+           
 
             PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
             requete.setInt(1, this.getJoueur().getId() );
@@ -261,17 +292,48 @@ public class Jeu {
             requete.executeUpdate();
 
             requete.close();
-            connexion.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }  
-    }
+
+        }  
+    
     
     public void addJoueursListe() {
         try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+            
+            for (int id =1 ; id <= 4 ; id++){
+                PreparedStatement requete = this.connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
+                requete.setInt(1, id );
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()){ 
+                    String pseudo = resultat.getString("pseudo");
+                    int x = resultat.getInt("x");
+                    int y = resultat.getInt("y");
+                    int score = resultat.getInt("score");
+                    if(this.joueur.getId()!= id){
+                        Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
+                        this.liste.add(joueur);
+                    }
+                    this.liste.add( joueur);
+//                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
+                }
+            }     
+        }
+          catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        //System.out.println("taille liste = " + this.liste.size()) ;
+    }
+       public void addJoueursListeSansCo(Connection connexion) throws SQLException {
+        
+            
+             try {
+
+            
             
             for (int id =1 ; id <= 4 ; id++){
                 PreparedStatement requete = connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
@@ -284,19 +346,20 @@ public class Jeu {
                     int score = resultat.getInt("score");
                     if(this.joueur.getId()!= id){
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
-                        this.liste.add(joueur);
+                        this.liste.add(id-1, joueur);
                     }
-                    this.liste.add(joueur);
+                    this.liste.add( joueur);
 //                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
             }     
         }
           catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        System.out.println("taille liste = " + this.liste.size()) ;
-    }
+        }     
+        
          
+    }   
+       
     public void miseAJourDataBase() {
          try {
 
@@ -323,20 +386,32 @@ public class Jeu {
     public void videTable(String nomTable){
          try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
 
-            PreparedStatement statement = connexion.prepareStatement("TRUNCATE TABLE "+ nomTable);
+            PreparedStatement statement = this.connexion.prepareStatement("TRUNCATE TABLE "+ nomTable);
             statement.execute() ;
-            connexion.close();
+            //connexion.close();
          }
          catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+    public void videTableSansCo(String nomTable, Connection connexion) throws SQLException{
+        
+        try {
+
+            PreparedStatement statement = connexion.prepareStatement("TRUNCATE TABLE "+ nomTable);
+            statement.execute() ;
+         }
+         catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
     public void supprimeMonJoueur(){
           try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
             
             PreparedStatement requete = connexion.prepareStatement("DELETE FROM joueur WHERE id_Joueur = ?");
             requete.setInt(1, this.joueur.getId());
@@ -344,14 +419,21 @@ public class Jeu {
             requete.executeUpdate();
 
             requete.close();
-            connexion.close();
+            //connexion.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     
-    
+   public void openConnexion () throws SQLException {
+        Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
+        this.connexion = connexion ;
+   }
+   
+   public void closeConnexion() throws SQLException {
+       this.connexion.close() ;
+   }
     
     public void rendu(Graphics2D contexte){
         contexte.drawImage(this.map.getDecor(), 0, 0, null);
@@ -372,6 +454,7 @@ public class Jeu {
     public void videListe(){
         this.liste.clear();
     }
+   
 
 //    void Afficher(Graphics2D contexteBuffer) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
