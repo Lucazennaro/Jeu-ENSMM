@@ -39,7 +39,7 @@ public class Jeu {
 
     public Jeu() {
         
-        this.map = new Map(2,2);
+        this.map = new Map(1,1);
        this.liste = new ArrayList<Objet>(14);
 
 //       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
