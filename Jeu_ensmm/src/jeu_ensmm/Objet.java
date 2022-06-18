@@ -47,6 +47,7 @@ public class Objet {
         this.vitesse = vitesse;
         
         this.score = score;
+        
         try {
             switch (numSprite) {
                 case 1 : this.setSprite(ImageIO.read(getClass().getResource("../resources/zombie.png"))); break;
@@ -140,23 +141,6 @@ public class Objet {
     }
      public int getHauteur(){
         return (int) sprite.getWidth();
-    }
-    public boolean collision(Objet objet){
-        if((this.x-objet.getX()<=objet.getSprite().getHeight()/2+this.getLargeur()/2) 
-           && (this.y-objet.getY()<=objet.getSprite().getWidth()/2+this.getHauteur()/2)){
-            System.out.println("yo");
-            Random newPosX =new Random();
-            Random newPosY =new Random();
-            this.setX(newPosX.nextInt(1776-objet.getLargeur()-3*32));
-            this.setY(newPosY.nextInt(992-objet.getHauteur()-32));
-            System.out.println(newPosX.nextInt(1776-objet.getLargeur()-3*32)/32);
-            System.out.println(newPosY.nextInt(992-objet.getHauteur()-32)/32);
-            
-            return true;
-        } else{
-            return false;
-        }
-                    
     }
 
     public int getId() {

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JTextField;
 import jeu_ensmm.FenetreDeJeu;
+import jeu_ensmm.Joueur;
 
 /**
  *
@@ -112,6 +113,7 @@ public class Pseudo extends javax.swing.JFrame {
         SalonAttente salon = new SalonAttente();
         salon.setVisible(true);
         salon.setjTextField1(""+this.nombreDeJoueurs());
+        salon.setjTextField2(this.getjTextField1());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -150,9 +152,19 @@ public class Pseudo extends javax.swing.JFrame {
         });
     }
 
+    public String getjTextField1() {
+        return jTextField1.getText();
+    }
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public void creationMonJoueur (String nom){
+        Joueur joueur = new Joueur(1, false, nom,0,0,false,false,false,false,0,0,1) ;
+        joueur.setId(this.nombreDeJoueurs()+1);  
+    }
 }

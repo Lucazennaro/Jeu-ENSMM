@@ -30,7 +30,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     private Jeu jeu1;
     private Timer timer;
 
-    public FenetreDeJeu() {
+    public FenetreDeJeu(String nom) {
         // initialisation de la fenetre
         this.setSize(1760, 992);
         this.setResizable(false);
@@ -41,8 +41,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.addKeyListener(this);
         this.pack();
         //Creation du jeu
-        this.jeu1 = new Jeu ();
-       // this.jeu1.addJoueur();
+        this.jeu1 = new Jeu();
+      
+       this.jeu1.creationMonJoueur(nom);
+       //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
+       this.jeu1.addJoueurTable();
+       this.jeu1.addJoueursListe();
+       System.out.println(this.jeu1.getListe());
         
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -55,11 +60,10 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         
         // ESSAIS BASE DE DONNEES
         
-       this.jeu1.creationMonJoueur("Géralduca");
-       System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
-       this.jeu1.addJoueur();
-       System.out.println(this.jeu1.getListe());
-       System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
+        
+        
+        System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
+        //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
    }
     public Graphics2D getContexte() {
         return this.contexte;
@@ -69,7 +73,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
-
+        this.jeu1.videTable("joueur");
+        this.jeu1.videListe();
+        this.jeu1.addJoueurTable();
+        this.jeu1.addJoueursListe();
+//        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
+//System.out.println(jeu1.getListe().get(0));
     }
     
     public void keyTyped(KeyEvent e) {
@@ -78,10 +87,11 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
-            this.jeu1.getJoueur().setDroite(true);
-//            System.out.println((int) this.jeu1.getListe().get(0).getX()/32);
-//            System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
-//            System.out.println(this.jeu1.getMap().getPlateforme()[3][0]);
+//            System.out.println("droite");
+            this.jeu1.getJoueur().setDroite(true) ;
+            //System.out.println((int) this.jeu1.getJoueur().getVitesse() + "vitesse ");
+           // System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
+//            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
@@ -97,7 +107,6 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
             this.dispose();
             this.jeu1.supprimeMonJoueur();
         }
-
     }
 
     public void keyReleased(KeyEvent evt) {
@@ -123,15 +132,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
         }
     
-    public static void main(String[] args) {      
-        FenetreDeJeu fenetre = new FenetreDeJeu();
         fenetre.setVisible(true);
-        fenetre.getJeu().rendu(fenetre.getContexte());     
+        fenetre.getJeu().rendu(fenetre.getContexte()); 
+        
     }
 
     public Jeu getJeu() {
         return jeu1;
     }
-    
-
+    System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
 }
