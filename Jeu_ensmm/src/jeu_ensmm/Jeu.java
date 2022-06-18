@@ -44,9 +44,11 @@ public class Jeu {
 
 //       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
         for(int i=1; i<8; i++){
-            this.liste.add(new Objet(i, "J1",150,150,false,false,false,false,12,-5,6)); 
-            this.liste.add(new Objet(i+1, "J1",500,800,false,false,false,false,12,15,5));
-        }// a enlever
+
+        this.liste.add(new Objet(i, "J1",150,150,false,false,false,false,12,-5,6)); 
+        this.liste.add(new Objet(i+1, "J1",500,800,false,false,false,false,12,15,5));
+
+        }
         
         this.joueur = new Joueur(1, false, "J1",64,64,false,false,false,false,8,0,1 );
         
@@ -93,8 +95,6 @@ public class Jeu {
             if (joueur.isDroite()== true || joueur.isGauche()== true){
                 
                 if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32+1] !=128 && joueur.isDroite()== true){
-                   // System.out.println(12);
-                   // System.out.println("yo");
                     joueur.setX(joueur.getX()-16);
                 }   
                 if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
@@ -285,7 +285,7 @@ public class Jeu {
             requete.setInt(3,this.getJoueur().getX());
             requete.setInt(4, this.getJoueur().getY());
             requete.setInt(5, this.getJoueur().getId());
-            requete.setInt(6, 0 );
+            requete.setInt(6, this.getJoueur().getScore() );
             
             //System.out.println(requete);
             requete.executeUpdate();
@@ -305,7 +305,7 @@ public class Jeu {
 
             //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
             
-            for (int id =1 ; id <= 4 ; id++){
+            for (int id =1 ; id <= 2 ; id++){
                 PreparedStatement requete = this.connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
                 requete.setInt(1, id );
                 ResultSet resultat = requete.executeQuery();
@@ -319,7 +319,7 @@ public class Jeu {
                         this.liste.set(id-1, joueur);
                     }
                     this.liste.set(id-1, joueur);
-//                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
+                    System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
                 requete.close();
             
@@ -354,10 +354,9 @@ public class Jeu {
                     int y = resultat.getInt("y");
                     int score = resultat.getInt("score");
                     if(this.joueur.getId()!= id){
-                        this.liste.get(this.liste.indexOf(id)).setX(x);
-                        System.out.println("Id = "+this.liste.get(id));
-                        this.liste.get(this.liste.indexOf(id)).setY(x);
-                        this.liste.get(this.liste.indexOf(id)).setScore(x);
+                        this.liste.get(id-1).setX(x);
+                        this.liste.get(id-1).setY(y);
+                        this.liste.get(id-1).setScore(score);
                     }
                     this.liste.set(this.joueur.getId()-1 , joueur);
 //                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());

@@ -155,10 +155,11 @@ public class Objet {
     
     public void miseAJourCote() {
         if (this.gauche) {
-            x -= vitesse/2;
+
+            x -= vitesse/4;
         }
         if (this.droite) {
-            x += vitesse/2;
+            x += vitesse/4;
         }
         if (x > 1776-this.getLargeur()) {
             x = 1776-this.getLargeur();
