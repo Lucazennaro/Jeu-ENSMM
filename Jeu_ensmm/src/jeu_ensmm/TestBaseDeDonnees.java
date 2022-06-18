@@ -6,6 +6,7 @@
 package jeu_ensmm;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,11 +19,8 @@ public class TestBaseDeDonnees {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        int classement[][] = new int[6][2];
-        classement[1][1]=1;
-        classement[1][0]=2;
-        System.out.println(Sort2DArrayBasedOnColumnNumber(classement,2));
+        JOptionPane.showMessageDialog(null," L ’ o p é r a t i o n   a"
+                + "   échoué   ! ");
     }
 
     private static boolean Sort2DArrayBasedOnColumnNumber(int[][] classement, int i) {
