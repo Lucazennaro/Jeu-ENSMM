@@ -82,6 +82,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jeu1.miseAJourDataBase();
         this.jeu1.rendu(contexte); 
         if (this.jeu1.finDuJeu()){
+            this.dispose();
+            this.timer.stop();
             this.jeu1.affichageClassement(this.jeu1.classementJoueurs());
             this.jeu1.videTable("joueur");
             this.dispose();
@@ -115,6 +117,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         }
         if (evt.getKeyCode() == evt.VK_ESCAPE) {
             this.dispose();
+            this.timer.stop();
             this.jeu1.supprimeMonJoueur();
             try {
                 this.jeu1.closeConnexion() ;
