@@ -101,7 +101,7 @@ public class Map {
             switch(numDecor) {
             case 1 : this.setDecor(ImageIO.read(getClass().getResource("../resources/ENSMM_exterieur.png"))); break;
             case 2 : this.setDecor(ImageIO.read(getClass().getResource("../resources/Chatelet_map.jpg"))); break;
-            }
+             }
         } catch (IOException ex) {
             Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -10,6 +10,7 @@ package jeu_ensmm;
  *
  * @author nbouvere
  */
+import interfaces.FinDePartie;
 import java.sql.Connection;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -29,7 +30,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class Jeu {
     private Map map ;
@@ -318,6 +321,7 @@ public class Jeu {
                     int score = resultat.getInt("score");
                     if(this.joueur.getId()!= id){
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
+                        this.liste.add(id-1,joueur);
                         this.liste.set(id-1, joueur);
                     }
                     this.liste.set(id-1, joueur);
@@ -436,14 +440,77 @@ public class Jeu {
     public void videListe(){
         this.liste.clear();
     }
+    
+    public boolean finDuJeu(){
+        ArrayList listescore = new ArrayList();
+        Boolean reponse = false;
+        try {
+            for (int id =1 ; id <= this.nombreDeJoueurs(); id++){
+                PreparedStatement requete = this.connexion.prepareStatement("SELECT score FROM joueur WHERE id_joueur = ?");
+                requete.setInt(1, id );
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()){
+                    int score = resultat.getInt("score");
+                    listescore.add(score);
+                    }
+            }  
+        }
+          catch (SQLException ex) {
+            ex.printStackTrace();
+        }     
+        for (int i = 0 ; i <listescore.size(); i++){
+            if ((int)listescore.get(i) >= 120){
+                reponse = true;
+            }
+        }
+        return reponse;
+    }
+    
+    public ArrayList classementJoueurs(){
+        ArrayList liste = new ArrayList();
+        ArrayList classement = new ArrayList();
+        try {
+            for (int id =1 ; id <= this.nombreDeJoueurs(); id++){
+                PreparedStatement requete = this.connexion.prepareStatement("SELECT score FROM joueur WHERE id_joueur = ?");
+                requete.setInt(1, id);
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()){
+                    int score = resultat.getInt("score");
+                    liste.add(score);
+                }
+            }
+            Collections.sort(liste, Collections.reverseOrder());
+            for (int i = 0; i<liste.size(); i++){
+                PreparedStatement requete = this.connexion.prepareStatement("SELECT pseudo FROM joueur WHERE score = ?");
+                requete.setInt(1, (int)liste.get(i) );
+                ResultSet resultat = requete.executeQuery();
+                String pseudo = resultat.getString("pseudo");
+                classement.add(pseudo);
+            }
+        }
+          catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        while (classement.size()<4){
+            classement.add("");
+        }
+        return classement;
+    }
+    
+    public void affichageClassement(ArrayList classement){
+        FinDePartie finDePartie = new FinDePartie();
+        finDePartie.setjLabel2("1er  : "+classement.get(0));
+        finDePartie.setjLabel3("2ème : "+classement.get(1));
+        finDePartie.setjLabel4("3ème : "+classement.get(2));
+        finDePartie.setjLabel2("4ème : "+classement.get(3));
+    }
+}
    
 
 //    void Afficher(Graphics2D contexteBuffer) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
     
-   
-}  
     
     
         

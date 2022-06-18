@@ -80,8 +80,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jLabel1.repaint();
         //System.out.println("ok");                 
         this.jeu1.miseAJourDataBase();
-        //this.jeu1.rendu(contexte); 
-        
+        this.jeu1.rendu(contexte); 
+        if (this.jeu1.finDuJeu()){
+            this.dispose();
+            this.jeu1.affichageClassement(this.jeu1.classementJoueurs());
+            this.jeu1.videTable("joueur");
+        }
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
 //System.out.println(jeu1.getListe().get(0));
         
@@ -96,7 +100,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true) ;
             System.out.println(this.jeu1.getListe());
-            System.out.println(this.jeu1.getListe().get(1) instanceof Joueur);
+            System.out.println(this.jeu1.getListe().get(this.jeu1.getJoueur().getId()) instanceof Joueur);
            //System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
