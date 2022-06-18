@@ -98,8 +98,8 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         if (evt.getKeyCode() == evt.VK_RIGHT) {
 //            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true) ;
-            //System.out.println((int) this.jeu1.getJoueur().getVitesse() + "vitesse ");
-           // System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
+            System.out.println(this.jeu1.getListe());
+           //System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
 //            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
@@ -119,6 +119,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
             } catch (SQLException ex) {
                 Logger.getLogger(FenetreDeJeu.class.getName()).log(Level.SEVERE, null, ex);
             }
+             System.out.println("fermeture connexion");
         }
      //   System.out.println("fermeture connexion");
       System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
