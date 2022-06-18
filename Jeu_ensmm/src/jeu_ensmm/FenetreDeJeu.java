@@ -78,12 +78,9 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
-        //System.out.println("ok");       
-        this.jeu1.videTable("joueur");        
-        this.jeu1.videListe();
-        this.jeu1.addJoueurTable();
-        this.jeu1.addJoueursListe();
-        this.jeu1.rendu(contexte); 
+        //System.out.println("ok");                 
+        this.jeu1.miseAJourDataBase();
+        //this.jeu1.rendu(contexte); 
         
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
 //System.out.println(jeu1.getListe().get(0));
