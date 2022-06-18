@@ -5,6 +5,8 @@
  */
 package jeu_ensmm;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cdebremo
@@ -16,8 +18,15 @@ public class TestBaseDeDonnees {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Jeu jeuTest = new Jeu() ;
-        jeuTest.creationObjet(0, "geg" , 0, 0, 0, 0);
+        
+        int classement[][] = new int[6][2];
+        classement[1][1]=1;
+        classement[1][0]=2;
+        System.out.println(Sort2DArrayBasedOnColumnNumber(classement,2));
+    }
+
+    private static boolean Sort2DArrayBasedOnColumnNumber(int[][] classement, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

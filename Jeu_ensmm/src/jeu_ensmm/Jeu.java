@@ -454,14 +454,59 @@ public class Jeu {
     public void videListe(){
         this.liste.clear();
     }
+    
+    public boolean finDuJeu(){
+        ArrayList listescore = new ArrayList();
+        Boolean reponse = false;
+        try {
+            for (int id =1 ; id <= this.nombreDeJoueurs(); id++){
+                PreparedStatement requete = this.connexion.prepareStatement("SELECT score FROM joueur WHERE id_joueur = ?");
+                requete.setInt(1, id );
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()){
+                    int score = resultat.getInt("score");
+                    listescore.add(score);
+                    }
+            }  
+        }
+          catch (SQLException ex) {
+            ex.printStackTrace();
+        }     
+        for (int i = 0 ; i <listescore.size(); i++){
+            if ((int)listescore.get(i) >= 120){
+                reponse = true;
+            }
+        }
+        return reponse;
+    }
+    
+    public ArrayList classementJoueurs(){
+        ArrayList classement = new ArrayList();
+        int classement2[][] = new int[this.nombreDeJoueurs()][2];
+        try {
+            for (int id =0 ; id < this.nombreDeJoueurs(); id++){
+                PreparedStatement requete = this.connexion.prepareStatement("SELECT score FROM joueur WHERE id_joueur = ?");
+                requete.setInt(1, id );
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()){
+                    int score = resultat.getInt("score");
+                    classement2[id][0]= id;
+                    classement2[id][1]= score;
+                }
+            }  
+        }
+          catch (SQLException ex) {
+            ex.printStackTrace();
+        }     
+    }
+
+}
    
 
 //    void Afficher(Graphics2D contexteBuffer) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
     
-   
-}  
     
     
         
