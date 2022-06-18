@@ -297,29 +297,7 @@ public class Jeu {
             ex.printStackTrace();
         }  
     }
-    public void addJoueurTableSansCo(Connection connexion) throws SQLException {
-       
-            try {
-           
-
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
-            requete.setInt(1, this.getJoueur().getId() );
-            requete.setString(2, this.getJoueur().getNom());
-            requete.setInt(3,this.getJoueur().getX());
-            requete.setInt(4, this.getJoueur().getY());
-            requete.setInt(5, this.getJoueur().getId());
-            requete.setInt(6, 0 );
-            
-            //System.out.println(requete);
-            requete.executeUpdate();
-
-            requete.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }  
-
-        }  
+    
     
     
     public void addJoueursListe() {
@@ -339,9 +317,10 @@ public class Jeu {
                     if(this.joueur.getId()!= id){
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
                         this.liste.add( joueur);
+                       // System.out.println("Id du joueur : "+this.joueur.getId());
                     }
                     this.liste.add( joueur);
-//                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
+                  //System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
                 requete.close();
             
@@ -451,13 +430,11 @@ public class Jeu {
         }
         for(int i =0; i < this.liste.size(); i+=1){
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);
-            //System.out.println(this.joueur.getX());
-            if(this.liste.get(i).getId()==1){
-            contexte.drawString("Joueur"+this.getJoueur().getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20);
-            
-        }
+            //System.out.println(this.joueur.getX());           
+            contexte.drawString("Joueur"+this.liste.get(i).getId()+ " Score : " + this.liste.get(i).getScore(), 10, 20+20*i);                   
         }
     }
+    
     public void videListe(){
         this.liste.clear();
     }
