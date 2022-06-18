@@ -305,7 +305,7 @@ public class Jeu {
 
             //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
             
-            for (int id =1 ; id <= 2 ; id++){
+            for (int id =1 ; id <= 4 ; id++){
                 PreparedStatement requete = this.connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
                 requete.setInt(1, id );
                 ResultSet resultat = requete.executeQuery();
