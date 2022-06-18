@@ -122,7 +122,7 @@ public class Objet {
         this.bas = bas;
     }
     public void setVitesse(int vitesse) {
-        this.vitesse = 8;
+        this.vitesse = vitesse;
     }
     public void setScore(int score) {
         this.score = score;
@@ -155,10 +155,10 @@ public class Objet {
     
     public void miseAJourCote() {
         if (this.gauche) {
-            x -= vitesse/4;
+            x -= vitesse;
         }
         if (this.droite) {
-            x += vitesse/4;
+            x += vitesse;
         }
         if (x > 1776-this.getLargeur()) {
             x = 1776-this.getLargeur();
@@ -178,7 +178,7 @@ public class Objet {
             y = 992-this.getHauteur();
         }
         if (y < 0) {
-            y = vitesse;
+            y = 0;
         }
     }
     
