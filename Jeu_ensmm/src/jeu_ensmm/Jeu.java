@@ -39,7 +39,7 @@ public class Jeu {
 
     public Jeu() {
         
-        this.map = new Map(2,2);
+       this.map = new Map(2,2);
        this.liste = new ArrayList<Objet>(14);
 
 //       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
@@ -97,7 +97,7 @@ public class Jeu {
                 }   
                 if (this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32]!=0 && this.map.getPlateforme()[(int) joueur.getY()/32-1][(int) joueur.getX()/32] !=128 && joueur.isGauche()== true){
                         joueur.setX(joueur.getX()+16);
-                        System.out.println(1);
+                        //System.out.println(1);
 
                 }              
             }
@@ -122,7 +122,7 @@ public class Jeu {
             while(this.map.getPlateforme()[newPosY/32][newPosX/32]!=0){
             newPosX = X.nextInt(1776-objet.getLargeur()-32);
             newPosY = Y.nextInt(992-objet.getHauteur()-32);
-            System.out.println(newPosX + newPosY);
+            //System.out.println(newPosX + newPosY);
         
        } 
             objet.setX(newPosX);
@@ -346,11 +346,15 @@ public class Jeu {
                 PreparedStatement requete2 = this.connexion.prepareStatement("SELECT pseudo, x, y, score FROM joueur WHERE id_joueur = ?");
                 requete2.setInt(1, id );
                 ResultSet resultat = requete2.executeQuery();
+                int x = 0;
+                int y = 0;
+                int score = 0;
                 while (resultat.next()){ 
                     String pseudo = resultat.getString("pseudo");
-                    int x = resultat.getInt("x");
-                    int y = resultat.getInt("y");
-                    int score = resultat.getInt("score");
+                    x = resultat.getInt("x");
+                    y = resultat.getInt("y");
+                    score = resultat.getInt("score");
+                }
                     if(this.joueur.getId()!= id){
                         this.liste.get(id-1).setX(x);
                         this.liste.get(id-1).setY(y);
@@ -358,10 +362,10 @@ public class Jeu {
                     }
                     this.liste.set(this.joueur.getId()-1 , joueur);
 //                   System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
-                }
+                
                 requete2.close();
             } 
-
+          this.liste.set(this.joueur.getId()-1 , joueur);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
