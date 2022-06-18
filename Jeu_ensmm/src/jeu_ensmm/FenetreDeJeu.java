@@ -116,6 +116,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         }
         if (evt.getKeyCode() == evt.VK_ESCAPE) {
             this.dispose();
+            this.timer.stop();
             this.jeu1.supprimeMonJoueur();
             try {
                 this.jeu1.closeConnexion() ;
