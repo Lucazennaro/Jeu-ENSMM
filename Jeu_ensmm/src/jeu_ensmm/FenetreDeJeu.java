@@ -83,6 +83,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jeu1.rendu(contexte); 
         if (this.jeu1.finDuJeu()){
             this.dispose();
+            this.timer.stop();
             this.jeu1.affichageClassement(this.jeu1.classementJoueurs());
             this.jeu1.videTable("joueur");
         }
