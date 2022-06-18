@@ -39,13 +39,12 @@ public class Jeu {
 
     public Jeu() {
         
-        this.map = new Map(1,1);
+        this.map = new Map(2,2);
        this.liste = new ArrayList<Objet>(14);
-
-//       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
+       //       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
         for(int i=1; i<8; i++){
-        this.liste.add(new Objet(i, "J1",150,150,false,false,false,false,12,-5,6)); 
-        this.liste.add(new Objet(i+1, "J1",500,800,false,false,false,false,12,15,5));
+        this.liste.add(new Objet(i, "malus", 32+i*187,50,false,false,false,false,12,-5,6)); 
+        this.liste.add(new Objet(i+1,"bonus", 32+i*233,20,false,false,false,false,12,15,5));
         }// a enlever
         
         this.joueur = new Joueur(1, false, "J1",64,64,false,false,false,false,8,0,1 );
