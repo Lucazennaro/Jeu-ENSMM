@@ -383,18 +383,9 @@ public class Jeu {
             ex.printStackTrace();
         }
     }
-    public void videTableSansCo(String nomTable, Connection connexion) throws SQLException{
-        
-        try {
 
-            PreparedStatement statement = connexion.prepareStatement("TRUNCATE TABLE "+ nomTable);
-            statement.execute() ;
-         }
-         catch (SQLException ex) {
-            ex.printStackTrace();
-        }
         
-    }
+    
     public void supprimeMonJoueur(){
           try {
 
