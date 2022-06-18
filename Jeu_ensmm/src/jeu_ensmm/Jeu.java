@@ -314,11 +314,9 @@ public class Jeu {
                     int score = resultat.getInt("score");
                     if(this.joueur.getId()!= id){
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
-<<<<<<< HEAD
+
                         this.liste.add(joueur);
-=======
                         this.liste.set(id-1, joueur);
->>>>>>> e0ed91cf15a4c50a40d15e3bcf4a6c0d73cc94e1
                     }
                     this.liste.set(id-1, joueur);
                     System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
