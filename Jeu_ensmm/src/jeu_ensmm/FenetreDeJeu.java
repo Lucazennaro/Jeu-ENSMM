@@ -16,21 +16,24 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Exemple de fenetre de jeu en utilisant uniquement des commandes
  *
  * @author guillaume.laurent
  */
-public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
-
+public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener {
+   
     private BufferedImage framebuffer;
     private Graphics2D contexte;
     private JLabel jLabel1;
     private Jeu jeu1;
     private Timer timer;
-
-    public FenetreDeJeu(String nom) {
+    
+    public FenetreDeJeu(String nom) throws SQLException {
+        
         // initialisation de la fenetre
         this.setSize(1760, 992);
         this.setResizable(false);
@@ -42,12 +45,14 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         this.pack();
         //Creation du jeu
         this.jeu1 = new Jeu();
-      
+        System.out.println("lancement jeu");
+        this.jeu1.openConnexion();
+        System.out.println("lancement connexion");
        this.jeu1.creationMonJoueur(nom);
        //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
        this.jeu1.addJoueurTable();
        this.jeu1.addJoueursListe();
-       System.out.println(this.jeu1.getListe());
+       System.out.println("attention"+this.jeu1.getListe());
         
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -69,16 +74,19 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         return this.contexte;
     }
     
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e ) {
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
         this.jLabel1.repaint();
-        this.jeu1.videTable("joueur");
+        System.out.println("ok");       
+        this.jeu1.videTable("joueur");        
         this.jeu1.videListe();
         this.jeu1.addJoueurTable();
         this.jeu1.addJoueursListe();
+       
 //        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
 //System.out.println(jeu1.getListe().get(0));
+        
     }
     
     public void keyTyped(KeyEvent e) {
@@ -105,7 +113,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
         if (evt.getKeyCode() == evt.VK_ESCAPE) {
             this.dispose();
             this.jeu1.supprimeMonJoueur();
+            try {
+                this.jeu1.closeConnexion() ;
+            } catch (SQLException ex) {
+                Logger.getLogger(FenetreDeJeu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        System.out.println("fermeture connexion");
     System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
     }
 
@@ -129,7 +143,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
 //        fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
 //        }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException  {
         FenetreDeJeu fenetre = new FenetreDeJeu("joueur");
         fenetre.setVisible(true);
         fenetre.getJeu().rendu(fenetre.getContexte()); 
@@ -139,6 +153,10 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener{
     public Jeu getJeu() {
         return jeu1;
     }
+
+    
+
+    
     
 
     
