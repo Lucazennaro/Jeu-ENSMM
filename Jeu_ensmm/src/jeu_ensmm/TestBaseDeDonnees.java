@@ -5,6 +5,9 @@
  */
 package jeu_ensmm;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author cdebremo
@@ -16,8 +19,12 @@ public class TestBaseDeDonnees {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Jeu jeuTest = new Jeu() ;
-        jeuTest.creationObjet(0, "geg" , 0, 0, 0, 0);
+        JOptionPane.showMessageDialog(null," L ’ o p é r a t i o n   a"
+                + "   échoué   ! ");
+    }
+
+    private static boolean Sort2DArrayBasedOnColumnNumber(int[][] classement, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
