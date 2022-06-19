@@ -168,9 +168,7 @@ public class Jeu {
             }
             this.getListe().get(this.getListe().indexOf(objet)).miseAJourVertical();
     }
-  public void miseAJourDeplacement{
-    this.mise
-            }
+  
     public void miseAJour(){
         for(int i =0; i < this.liste.size(); i+=1){
                 this.miseAJourDeplacement(this.liste.get(i));
