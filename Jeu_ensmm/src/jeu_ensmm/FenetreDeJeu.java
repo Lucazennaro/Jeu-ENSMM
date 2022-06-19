@@ -159,14 +159,4 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     public Jeu getJeu() {
         return jeu1;
     }
-
-    
-
-    
-    
-
-    
-
-   
-
 }
