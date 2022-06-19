@@ -121,7 +121,7 @@ public class Objet {
         this.bas = bas;
     }
     public void setVitesse(int vitesse) {
-        this.vitesse = 8;
+        this.vitesse = vitesse;
     }
     public void setScore(int score) {
         this.score = score;
@@ -177,7 +177,7 @@ public class Objet {
             y = 992-this.getHauteur();
         }
         if (y < 0) {
-            y = vitesse;
+            y = 0;
         }
     }
     
