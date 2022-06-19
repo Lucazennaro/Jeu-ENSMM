@@ -155,7 +155,8 @@ public class Objet {
     
     public void miseAJourCote() {
         if (this.gauche) {
-            x -= vitesse;
+
+            x -= vitesse/4;
         }
         if (this.droite) {
             x += vitesse;
