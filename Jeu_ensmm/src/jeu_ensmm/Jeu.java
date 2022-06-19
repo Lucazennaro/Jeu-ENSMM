@@ -503,7 +503,7 @@ public class Jeu {
         finDePartie.setjLabel2("1er  : "+classement.get(0));
         finDePartie.setjLabel3("2ème : "+classement.get(1));
         finDePartie.setjLabel4("3ème : "+classement.get(2));
-        finDePartie.setjLabel2("4ème : "+classement.get(3));
+        finDePartie.setjLabel5("4ème : "+classement.get(3));
     }
 }
    
