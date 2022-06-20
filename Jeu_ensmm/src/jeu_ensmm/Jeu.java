@@ -42,7 +42,7 @@ public class Jeu {
 
     public Jeu() {
         
-       this.map = new Map(2,2);
+       this.map = new Map(1,1);
        this.liste = new ArrayList<Objet>(14);
        //       // this.joueur = new Joueur(1,false, "J1",0,32,false,false,false,false,12,0,1);
         // a enlever
@@ -105,7 +105,7 @@ public class Jeu {
                 }              
             }
         }
-        joueur.miseAJourCote();
+        objet.miseAJourCote();
     }
 
     public void miseAjourScore(Objet objet){
@@ -277,28 +277,7 @@ public class Jeu {
             ex.printStackTrace();
         }  
     }
-    public void majTable() {
-        try {
-            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP" );
-
-            PreparedStatement requete = this.connexion.prepareStatement("UPDATE joueur SET x = ?, y = ? WHERE id = ?");
-            requete.setInt(1, this.getJoueur().getId() );
-            requete.setString(2, this.getJoueur().getNom());
-            requete.setInt(3,this.getJoueur().getX());
-            requete.setInt(4, this.getJoueur().getY());
-            requete.setInt(5, this.getJoueur().getId());
-            requete.setInt(6, this.getJoueur().getScore() );
-            
-            //System.out.println(requete);
-            requete.executeUpdate();
-
-            requete.close();
-            //connexion.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }  
-    }
+   
     
     
     
@@ -320,15 +299,15 @@ public class Jeu {
                      y = resultat.getInt("y");
                      score = resultat.getInt("score");
                     
-                    System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
+//                    System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
                 requete.close();
             if(this.joueur.getId()!= id){
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
 //                        this.liste.add(id-1,joueur);
-                        this.liste.set(id-1, joueur);
+                        this.liste.set( id-1 , joueur);
                     }
-                    this.liste.set(id-1, joueur);
+                    this.liste.set(this.getJoueur().getId()-1 , joueur);
             }
         }
           catch (SQLException ex) {
@@ -341,7 +320,7 @@ public class Jeu {
     public void miseAJourDataBase() {
          try {
                 
-            PreparedStatement requete = connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id_joueur = ?");  // exportation des infos de mon joueur
+            PreparedStatement requete = this.connexion.prepareStatement("UPDATE joueur SET x = ?, y = ?, score = ? WHERE id_joueur = ?");  // exportation des infos de mon joueur
             requete.setInt(1, this.joueur.getX());
             requete.setInt(2, this.joueur.getY());
             requete.setInt(3, this.joueur.getScore());
@@ -402,7 +381,7 @@ public class Jeu {
             
             PreparedStatement requete = connexion.prepareStatement("DELETE FROM joueur WHERE id_Joueur = ?");
             requete.setInt(1, this.joueur.getId());
-            System.out.println(requete);
+            
             requete.executeUpdate();
 
             requete.close();
