@@ -372,7 +372,7 @@ public class Jeu {
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);          
             if(this.liste.get(i) instanceof Joueur){
             contexte.drawString(this.liste.get(i).getNom()+ " Score : " + this.liste.get(i).getScore(), 10, 20+20*i);
-            contexte.drawString(this.liste.get(i).getNom(), this.liste.get(i).getX(), this.liste.get(i).getY());
+            contexte.drawString(this.liste.get(i).getNom(), this.liste.get(i).getX(), this.liste.get(i).getY()-36);
             }
         }
     }
