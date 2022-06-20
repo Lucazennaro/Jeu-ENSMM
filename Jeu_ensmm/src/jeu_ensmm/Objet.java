@@ -161,8 +161,8 @@ public class Objet {
         if (this.droite) {
             x += vitesse;
         }
-        if (x > 1776-this.getLargeur()) {
-            x = 1776-this.getLargeur();
+        if (x > 1776-2*this.getLargeur()) {
+            x = 1776-2*this.getLargeur();
         }
         if (x < 0) {
             x = 0;

@@ -51,7 +51,7 @@ public class Jeu {
         this.liste.add(new Objet(i+4, "malus", 32+i*187,50,false,false,false,false,12,-5,6)); 
         this.liste.add(new Objet(i+5,"bonus", 32+i*233,20,false,false,false,false,12,15,5));
         }
-        this.joueur = new Joueur(1, false, "J1",64,64,false,false,false,false,8,0,1 );
+        this.joueur = new Joueur(1, false, "J1",1000,64,false,false,false,false,8,0,1 );
     }
 
     public Map getMap() {
@@ -117,7 +117,6 @@ public class Jeu {
     public boolean Collision(Objet objet){
         if((int) (this.getListe().get(this.getListe().indexOf(objet)).getY()/32)== joueur.getY()/32
                     && (int) (this.getListe().get(this.getListe().indexOf(objet)).getX()/32)== joueur.getX()/32){
-            
             Random X =new Random();
             Random Y =new Random();
             int newPosX = X.nextInt(1776-objet.getLargeur()-32);        //-32 pour être sur de ne pas être trop près du bord de l'écran
@@ -125,7 +124,7 @@ public class Jeu {
             while(this.map.getPlateforme()[newPosY/32][newPosX/32]!=0){
             newPosX = X.nextInt(1776-objet.getLargeur()-32);
             newPosY = Y.nextInt(992-objet.getHauteur()-32);
-       } 
+        } 
             objet.setX(newPosX);
             objet.setY(newPosY);
             return true;
@@ -159,8 +158,7 @@ public class Jeu {
                         && this.joueur.isHaut()== true){
                     this.joueur.setHaut(true);
                     this.joueur.setBas(false);   
-                }            
-                
+                }  
             }
                 
         }
@@ -169,7 +167,7 @@ public class Jeu {
                     this.getListe().get(this.getListe().indexOf(objet)).setBas(true);
                     this.getListe().get(this.getListe().indexOf(objet)).setHaut(false);
                     
-                }
+            }
             if(!(objet instanceof Joueur)){
                 if ((this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32]!=0) 
                         || (this.map.getPlateforme()[(int) objet.getY()/32][(int) objet.getX()/32+1]!=0) ) {
@@ -190,8 +188,8 @@ public class Jeu {
                 if(!(this.liste.get(i) instanceof Joueur)){   
                     this.miseAjourScore((this.liste.get(i)));
                 }
-            }
         }
+    }
 
     
     public int nombreDeJoueurs(){
@@ -237,7 +235,7 @@ public class Jeu {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-   }
+    }
     
     public void creationMonJoueur (String nom){
         joueur.setNom(nom);
@@ -260,9 +258,6 @@ public class Jeu {
         }  
     }
    
-    
-    
-    
     public void addJoueursListe() {
         try {
             for (int id =1 ; id <= 4 ; id++){
@@ -280,7 +275,7 @@ public class Jeu {
                     
 //                    System.out.println("id = " + this.liste.get(id-1).getId() + "  pseudo = " +  this.liste.get(id-1).getNom() + " score = " + this.liste.get(id-1).getScore() + this.liste.get(id-1).getSprite());
                 }
-                requete.close();
+            requete.close();
             if(this.joueur.getId()!= id){
                         Joueur joueur = new Joueur (id, false, "pseudo",x,y,false,false,false,false,12,score,id);
                         this.liste.set(id-1, joueur);
@@ -376,7 +371,8 @@ public class Jeu {
         for(int i =0; i < this.liste.size(); i+=1){
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);          
             if(this.liste.get(i) instanceof Joueur){
-            contexte.drawString(this.liste.get(i).getNom()+ " Score : " + this.liste.get(i).getScore(), 10, 20+20*i); 
+            contexte.drawString(this.liste.get(i).getNom()+ " Score : " + this.liste.get(i).getScore(), 10, 20+20*i);
+            contexte.drawString(this.liste.get(i).getNom(), this.liste.get(i).getX(), this.liste.get(i).getY());
             }
         }
     }
@@ -424,12 +420,15 @@ public class Jeu {
                 }
             }
             Collections.sort(liste, Collections.reverseOrder());
+            System.out.println(liste);
             for (int i = 0; i<liste.size(); i++){
                 PreparedStatement requete = this.connexion.prepareStatement("SELECT pseudo FROM joueur WHERE score = ?");
-                requete.setInt(1, (int)liste.get(i) );
+                requete.setInt(1,(int)liste.get(i));
                 ResultSet resultat = requete.executeQuery();
-                String pseudo = resultat.getString("pseudo");
-                classement.add(pseudo);
+                while (resultat.next()){
+                    String pseudo = resultat.getString("pseudo");
+                    classement.add(pseudo);
+                }
             }
         }
           catch (SQLException ex) {
@@ -438,16 +437,23 @@ public class Jeu {
         while (classement.size()<4){
             classement.add("");
         }
+        while (liste.size()<4){
+            liste.add("");
+        }
+        for (int i = 0; i<liste.size(); i++){
+            classement.add(liste.get(i));
+        }
         return classement;
     }
     
     public void affichageClassement(ArrayList classement){
         FinDePartie finDePartie = new FinDePartie();
         finDePartie.setVisible(true);
-        finDePartie.setjLabel2("1er  : "+classement.get(0));
-        finDePartie.setjLabel3("2ème : "+classement.get(1));
-        finDePartie.setjLabel4("3ème : "+classement.get(2));
-        finDePartie.setjLabel5("4ème : "+classement.get(3));
+//        System.out.println(classement);
+        finDePartie.setjLabel2("1er  : "+classement.get(0)+"    score : "+classement.get(4));
+        finDePartie.setjLabel3("2ème : "+classement.get(1)+"    score : "+classement.get(5));
+        finDePartie.setjLabel4("3ème : "+classement.get(2)+"    score : "+classement.get(6));
+        finDePartie.setjLabel5("4ème : "+classement.get(3)+"    score : "+classement.get(7));
     }
 }
     
