@@ -309,13 +309,15 @@ public class Jeu {
                 int x = 0;
                 int y = 0;
                 int score = 0;
+                String pseudo = "";
                 while (resultat.next()){ 
-                    String pseudo = resultat.getString("pseudo");
+                    pseudo = resultat.getString("pseudo");
                     x = resultat.getInt("x");
                     y = resultat.getInt("y");
                     score = resultat.getInt("score");
                 }
                     if(this.joueur.getId()!= id){
+                        this.liste.get(id-1).setNom(pseudo);
                         this.liste.get(id-1).setX(x);
                         this.liste.get(id-1).setY(y);
                         this.liste.get(id-1).setScore(score);
@@ -372,7 +374,7 @@ public class Jeu {
             contexte.drawImage(this.liste.get(i).getSprite() , this.liste.get(i).getX(), this.liste.get(i).getY()-32, null);          
             if(this.liste.get(i) instanceof Joueur){
             contexte.drawString(this.liste.get(i).getNom()+ " Score : " + this.liste.get(i).getScore(), 10, 20+20*i);
-            contexte.drawString(this.liste.get(i).getNom(), this.liste.get(i).getX(), this.liste.get(i).getY());
+            contexte.drawString(this.liste.get(i).getNom(), this.liste.get(i).getX(), this.liste.get(i).getY()-36);
             }
         }
     }
