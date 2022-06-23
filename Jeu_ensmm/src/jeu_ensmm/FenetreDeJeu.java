@@ -48,11 +48,10 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         System.out.println("lancement jeu");
         this.jeu1.openConnexion();
         System.out.println("lancement connexion");
-       this.jeu1.creationMonJoueur(nom);
-       //System.out.println("nom = " + this.jeu1.getJoueur().getNom() + "    id = " + this.jeu1.getJoueur().getId());
-       this.jeu1.addJoueurTable();
-       this.jeu1.addJoueursListe();
-       System.out.println("attention"+this.jeu1.getListe());
+        this.jeu1.creationMonJoueur(nom);
+        this.jeu1.addJoueurTable();
+        this.jeu1.addJoueursListe();
+        System.out.println("attention"+this.jeu1.getListe());
         
         // Creation du buffer pour l'affichage du jeu et recuperation du contexte graphique
         this.framebuffer = new BufferedImage(this.jLabel1.getWidth(), this.jLabel1.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -63,12 +62,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.timer = new Timer(40, this);
         this.timer.start();
         
-        // ESSAIS BASE DE DONNEES
-        
-        
-        
         System.out.println("nombre de joueurs = " + this.jeu1.nombreDeJoueurs() +"." + "nombre d'objets = " + this.jeu1.nombreObjets());
-        //this.jeu1.creationObjet(1, "AH", 20, 10, 600, 1);
    }
     public Graphics2D getContexte() {
         return this.contexte;
@@ -80,6 +74,10 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.jLabel1.repaint();
         //System.out.println("ok");                 
         this.jeu1.miseAJourDataBase();
+        //this.jeu1.videListe();
+        //this.jeu1.videTable("joueur");
+        //this.jeu1.addJoueurTable();
+       // this.jeu1.addJoueursListe();
         this.jeu1.rendu(contexte); 
         if (this.jeu1.finDuJeu()){
             this.dispose();
@@ -87,10 +85,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
             this.jeu1.affichageClassement(this.jeu1.classementJoueurs());
             this.jeu1.videTable("joueur");
             this.dispose();
-        }
-//        System.out.println(jeu1.get.plateforme.getPlateforme()[objet.getX()%31][objet.getY()%31]);
-//System.out.println(jeu1.getListe().get(0));
-        
+        }   
     }
     
     public void keyTyped(KeyEvent e) {
@@ -99,12 +94,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     
     public void keyPressed(KeyEvent evt) {
         if (evt.getKeyCode() == evt.VK_RIGHT) {
-//            System.out.println("droite");
             this.jeu1.getJoueur().setDroite(true) ;
-            System.out.println(this.jeu1.getListe());
-            System.out.println(this.jeu1.getListe().get(this.jeu1.getJoueur().getId()) instanceof Joueur);
-           //System.out.println((int) this.jeu1.getListe().get(1).getX()/32);
-//            System.out.println(this.jeu1.getPlateforme().getPlateforme()[(int) this.jeu1.getListe().get(0).getX()/32][(int) this.jeu1.getListe().get(0).getY()/32]);
         }
         if (evt.getKeyCode() == evt.VK_LEFT) {
             this.jeu1.getJoueur().setGauche(true);
@@ -127,7 +117,6 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
             }
              System.out.println("fermeture connexion");
         }
-     //   System.out.println("fermeture connexion");
       System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
     }
 
@@ -140,19 +129,13 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         }
         if (evt.getKeyCode() == evt.VK_DOWN) {
             this.jeu1.getJoueur().setBas(false);
-//            System.out.println( this.jeu1.getListe().get(0).isHaut());
-//        }
-
+        }
         if (evt.getKeyCode() == evt.VK_UP) {
             this.jeu1.getJoueur().setHaut(false);
-   
         }
 
     }
-    }
-    public void AffichageScore(Joueur joueur1, Graphics2D fenetre_graphique){
-        fenetre_graphique.drawString("Score : " + joueur1.score(), 10, 20);
-        }
+
     
     public static void main(String[] args) throws SQLException  {
         FenetreDeJeu fenetre = new FenetreDeJeu("joueur");
