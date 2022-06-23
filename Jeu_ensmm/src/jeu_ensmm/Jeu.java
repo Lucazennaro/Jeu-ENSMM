@@ -309,13 +309,15 @@ public class Jeu {
                 int x = 0;
                 int y = 0;
                 int score = 0;
+                String pseudo = "";
                 while (resultat.next()){ 
-                    String pseudo = resultat.getString("pseudo");
+                    pseudo = resultat.getString("pseudo");
                     x = resultat.getInt("x");
                     y = resultat.getInt("y");
                     score = resultat.getInt("score");
                 }
                     if(this.joueur.getId()!= id){
+                        this.liste.get(id-1).setNom(pseudo);
                         this.liste.get(id-1).setX(x);
                         this.liste.get(id-1).setY(y);
                         this.liste.get(id-1).setScore(score);
