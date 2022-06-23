@@ -145,7 +145,7 @@ public class SalonAttente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
         try {
-            this.supprimeMonJoueur();
+//            this.supprimeMonJoueur();
             FenetreDeJeu fenetre = new FenetreDeJeu(this.getjLabel4());
             fenetre.setVisible(true);
             fenetre.getJeu().rendu(fenetre.getContexte());// TODO add your handling code here:
