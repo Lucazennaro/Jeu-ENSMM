@@ -5,12 +5,17 @@
  */
 package interfaces;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import jeu_ensmm.FenetreDeJeu;
 import jeu_ensmm.Joueur;
@@ -19,7 +24,7 @@ import jeu_ensmm.Joueur;
  *
  * @author lzennaro
  */
-public class Pseudo extends javax.swing.JFrame {
+public class Pseudo extends javax.swing.JFrame{
 
     /**
      * Creates new form Pseudo
@@ -44,6 +49,11 @@ public class Pseudo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Veuillez renseigner votre pseudo");
@@ -100,8 +110,6 @@ public class Pseudo extends javax.swing.JFrame {
             nbJoueurs = resultat.getInt("nbJoueurs") ;
             requete.close();
             connexion.close();
-            
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -112,10 +120,21 @@ public class Pseudo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SalonAttente salon = new SalonAttente();
         salon.setVisible(true);
-        salon.setjTextField1(""+this.nombreDeJoueurs());
-        salon.setjTextField2(this.getjTextField1());
+        salon.setjLabel4(this.getjTextField1());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        if("".equals(this.getjTextField1())){
+                JOptionPane.showMessageDialog(null,"Aucun pseudo n'a été saisi");
+            }
+            else{
+                SalonAttente salon = new SalonAttente();
+                salon.setVisible(true);;
+                salon.setjLabel4(this.getjTextField1());
+                this.dispose();
+            }
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,8 +182,4 @@ public class Pseudo extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    public void creationMonJoueur (String nom){
-        Joueur joueur = new Joueur(1, false, nom,0,0,false,false,false,false,0,0,1) ;
-        joueur.setId(this.nombreDeJoueurs()+1);  
-    }
 }

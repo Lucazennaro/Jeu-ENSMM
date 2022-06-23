@@ -43,6 +43,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
         this.setContentPane(this.jLabel1);
         this.addKeyListener(this);
         this.pack();
+        
         //Creation du jeu
         this.jeu1 = new Jeu();
         System.out.println("lancement jeu");
@@ -71,18 +72,12 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
     public void actionPerformed(ActionEvent e ) {
         this.jeu1.miseAJour();
         this.jeu1.rendu(contexte);
-        this.jLabel1.repaint();
-        //System.out.println("ok");                 
+        this.jLabel1.repaint();                 
         this.jeu1.miseAJourDataBase();
-        //this.jeu1.videListe();
-        //this.jeu1.videTable("joueur");
-        //this.jeu1.addJoueurTable();
-       // this.jeu1.addJoueursListe();
         this.jeu1.rendu(contexte); 
         if (this.jeu1.finDuJeu()){
-            this.dispose();
-            this.timer.stop();
             this.jeu1.affichageClassement(this.jeu1.classementJoueurs());
+            this.timer.stop();
             this.jeu1.videTable("joueur");
             this.dispose();
         }   
@@ -115,7 +110,7 @@ public class FenetreDeJeu extends JFrame implements ActionListener, KeyListener 
             } catch (SQLException ex) {
                 Logger.getLogger(FenetreDeJeu.class.getName()).log(Level.SEVERE, null, ex);
             }
-             System.out.println("fermeture connexion");
+            System.out.println("fermeture connexion");
         }
       System.out.println("  x= "+this.jeu1.getJoueur().getX()+"  y=  "+this.jeu1.getJoueur().getY());
     }
