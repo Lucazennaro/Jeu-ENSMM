@@ -456,7 +456,7 @@ public class Jeu {
     public void affichageClassement(ArrayList classement){
         FinDePartie finDePartie = new FinDePartie();
         finDePartie.setVisible(true);
-//        System.out.println(classement);
+        System.out.println(classement);
         finDePartie.setjLabel2("1er  : "+classement.get(0)+"    score : "+classement.get(4));
         finDePartie.setjLabel3("2ème : "+classement.get(1)+"    score : "+classement.get(5));
         finDePartie.setjLabel4("3ème : "+classement.get(2)+"    score : "+classement.get(6));

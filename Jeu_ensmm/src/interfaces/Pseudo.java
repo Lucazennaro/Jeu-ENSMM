@@ -120,8 +120,6 @@ public class Pseudo extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SalonAttente salon = new SalonAttente();
         salon.setVisible(true);
-//        this.addJoueurTable();
-        salon.setjTextField1(""+this.nombreDeJoueurs());
         salon.setjLabel4(this.getjTextField1());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -132,9 +130,7 @@ public class Pseudo extends javax.swing.JFrame{
             }
             else{
                 SalonAttente salon = new SalonAttente();
-                salon.setVisible(true);
-                this.addJoueurTable();
-                salon.setjTextField1(""+this.nombreDeJoueurs());
+                salon.setVisible(true);;
                 salon.setjLabel4(this.getjTextField1());
                 this.dispose();
             }
@@ -186,21 +182,4 @@ public class Pseudo extends javax.swing.JFrame{
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    public void addJoueurTable() {
-        try {
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20212022_s2_vs1_tp2_supmuriotech?serverTimezone=UTC", "etudiant","YTDTvj9TR3CDYCmP");
-            PreparedStatement requete = connexion.prepareStatement("INSERT INTO joueur VALUES (?,?,?,?,?,?)");
-            requete.setInt(1, this.nombreDeJoueurs()+1 );
-            requete.setString(2, this.getjTextField1());
-            requete.setInt(3,0);
-            requete.setInt(4,0);
-            requete.setInt(5,this.nombreDeJoueurs()+1);
-            requete.setInt(6, 0 );
-            requete.executeUpdate();
-            requete.close();
-            connexion.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }  
-    }
 }
