@@ -120,17 +120,18 @@ public class Jeu {
     }
 
     public boolean Collision(Objet objet){
-        if((int) (this.getListe().get(this.getListe().indexOf(objet)).getY()/32)== joueur.getY()/32
-                    && (int) (this.getListe().get(this.getListe().indexOf(objet)).getX()/32)== joueur.getX()/32){
-            Random X =new Random();
+        if((int) (this.getListe().get(this.getListe().indexOf(objet)).getY()/32)== joueur.getY()/32 // comparaison des ordonnées
+                    && (int) (this.getListe().get(this.getListe().indexOf(objet)).getX()/32)== joueur.getX()/32){ // comparaison des abscisses
+            System.out.println("PAF");      // test d'acceptation
+            Random X =new Random();          
             Random Y =new Random();
-            int newPosX = X.nextInt(1776-objet.getLargeur()-32);        //-32 pour être sur de ne pas être trop près du bord de l'écran
-            int newPosY = Y.nextInt(992-objet.getHauteur()-32);
-            while(this.map.getPlateforme()[newPosY/32][newPosX/32]!=0){
+            int newPosX = X.nextInt(1776-objet.getLargeur()-32);        // initialisation des nouvelles coordonnées de l'objet
+            int newPosY = Y.nextInt(992-objet.getHauteur()-32);         //-32 pour être sur de ne pas être trop près du bord de l'écran
+            while(this.map.getPlateforme()[newPosY/32][newPosX/32]!=0){ // verification: tant que l'objet n'est pas dans un espace vide( pas dans un obstacle), on recalcule des coordonnées
             newPosX = X.nextInt(1776-objet.getLargeur()-32);
             newPosY = Y.nextInt(992-objet.getHauteur()-32);
         } 
-            objet.setX(newPosX);
+            objet.setX(newPosX);    
             objet.setY(newPosY);
             return true;
         }
